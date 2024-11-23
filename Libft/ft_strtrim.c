@@ -12,48 +12,58 @@
 
 #include "libft.h"
 
-static size_t	find_start(char const *s1, char const *set)
+static int	ft_isset(char c, char const *set)
 {
-	size_t	start;
-
-	start = 0;
-	while (s1[start] && ft_strchr(set, s1[start]))
-		start++;
-	return (start);
-}
-
-staic size_t	find_end(char const *s1, char const *set)
-{
-	size_t	end;
-
-	end = ft_strlen(s1);
-	while (end > start && ft_strchr(set, s1[end - 1]))
-		end--;
-	return (end);
+	while(*set)
+	{
+		if (c == *set)
+			return (1);
+		set++;
+	}
+	return (0);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	start;
-	size_t	end;
 	size_t	len;
 	size_t	i;
+	size_t	j;
 	char	*trimmed;
 
 	if (!s1 || !set)
 		return (NULL);
-	start = find_start(s1, set);
-	end = find_end(s1, set);
-	len = end - start;
-	trimmed = malloc(len + 1);
+	len = ft_strlen(s1);
+	trimmed = (char *)malloc(len + 1);
 	if (!trimmed)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	j = 0;
+	while (s[i] != '\0')
 	{
-		trimmed[i] = s1[start + i];
+		if(!ft_isset(s1[i], set))
+		{
+			trimmed[j] = s1[i];
+			j++;
+		}
 		i++;
 	}
 	trimmed[i] = '\0';
 	return (trimmed);
+}
+
+int main(void)
+{
+	char	*s1 = "  ciaoooo blabla  ";
+	char	*set = " ";
+	char	*result = ft_strtrim(s1, set);
+
+	if (result)
+	{
+		printf("Stringa originale: %s\n", s1);
+		printf("Trimmed string: %s\n", result);
+		free(result);
+	}
+	else
+		printf("Error: Memory allocation failed.\n");
+	return 0;
 }

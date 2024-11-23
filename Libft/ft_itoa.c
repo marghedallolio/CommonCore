@@ -69,3 +69,20 @@ char	*ft_itoa(int n)
 	i = ft_len(num);
 	return (build_itoa_str(num, i));
 }
+/*
+int	main(void)
+{
+	int	num[] = {42, -42, 0, 123456, -98765};
+	int	test = sizeof(num) / sizeof(num[0]);
+	char	*result;
+	int	i;
+	
+	i = 0;
+	while (i < test)
+	{
+		result = ft_itoa(num[i]);
+		printf("Originale: %d -> Convertita: %s\n", num[i], result);
+		free(result);
+	}
+	return (0);
+}*/

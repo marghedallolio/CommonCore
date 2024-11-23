@@ -29,3 +29,17 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
+/*
+int	main(void)
+{
+	char	buff1[] = "ciao, ciao";
+	char	buff2[] = "ciao, ciao";
+	char	buff3[] = "ciao, addio";
+	size_t	n;
+	
+	n = 10;
+	printf("Comparazione tra %s e %s per %zu bytes: %d\n", buff1, buff2, n, ft_memcmp(buff1, buff2, n));
+	
+	n = 11;
+	printf("Comparazione tra %s e %s per %zu bytes: %d\n", buff2, buff3, n, ft_memcmp(buff2, buff3, n));
+}*/
