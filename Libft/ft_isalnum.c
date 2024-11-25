@@ -35,7 +35,8 @@ int	main(void)
 	while (i < numtest)
 	{
 		char c = test[i];
-		printf("Test del carattere: '%c' (%d): %s\n",c ,c , ft_isalnum(c) ? "Alfanumerico" : "Non alfanumerico");
+		printf("Test del carattere: '%c' (%d): %s\n",c ,c , ft_isalnum(c) ? 
+				"Alfanumerico" : "Non alfanumerico");
 		i++;
 	}
 	return (0);

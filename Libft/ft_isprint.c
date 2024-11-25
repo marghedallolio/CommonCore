@@ -35,7 +35,8 @@ int	main(void)
 	while (i < numtest)
 	{
 		char c = test[i];
-		printf("Test del carattere: '%c' (%d): %s\n",c ,c , ft_isprint(c) ? "printable" : "Non printable");
+		printf("Test del carattere: '%c' (%d): %s\n",c ,c , 
+				ft_isprint(c) ? "printable" : "Non printable");
 		i++;
 	}
 	return (0);

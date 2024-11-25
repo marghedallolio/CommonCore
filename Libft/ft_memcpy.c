@@ -28,3 +28,14 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
+/*
+int	main(void)
+{
+	char src1[] = "Hello, world!";
+	char dest1[20];
+	printf("Test 1: Copia di una stringa\n");
+	printf("Sorgente: '%s'\n", src1);
+	ft_memcpy(dest1, src1, strlen(src1) + 1);
+	printf("Destinazione dopo memcpy: '%s'\n", dest1);
+	return (0);
+}*/

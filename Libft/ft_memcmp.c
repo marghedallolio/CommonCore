@@ -38,8 +38,10 @@ int	main(void)
 	size_t	n;
 	
 	n = 10;
-	printf("Comparazione tra %s e %s per %zu bytes: %d\n", buff1, buff2, n, ft_memcmp(buff1, buff2, n));
+	printf("Comparazione tra %s e %s per %zu bytes: %d\n", buff1, buff2, n, 
+			ft_memcmp(buff1, buff2, n));
 	
 	n = 11;
-	printf("Comparazione tra %s e %s per %zu bytes: %d\n", buff2, buff3, n, ft_memcmp(buff2, buff3, n));
+	printf("Comparazione tra %s e %s per %zu bytes: %d\n", buff2, buff3, n, 
+			ft_memcmp(buff2, buff3, n));
 }*/

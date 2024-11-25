@@ -35,7 +35,8 @@ int	main(void)
 	while (i < numtest)
 	{
 		char c = test[i];
-		printf("Test del carattere: '%c' (%d): %s\n",c ,c , ft_isdigit(c) ? "numero" : "Non numero");
+		printf("Test del carattere: '%c' (%d): %s\n",c ,c , 
+				ft_isdigit(c) ? "numero" : "Non numero");
 		i++;
 	}
 	return (0);
