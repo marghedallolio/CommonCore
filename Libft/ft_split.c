@@ -76,7 +76,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	word_count = count_words(s, c);
-	result = (char *)malloc(sizeof(char *) * (word_count + 1));
+	result = (char **)malloc(sizeof(char *) * (word_count + 1));
 	if (!result)
 		return (NULL);
 	return (compila(s, result, c, word_count));
