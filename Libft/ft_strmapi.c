@@ -11,7 +11,15 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-
+/*
+char	ft_alternate_case(unsigned int i, char c)
+{
+	if (i % 2 == 0)
+		return (c >= 'a' && c <= 'z') ? c - 32 : c;
+	else
+		return (c >= 'A' && c <= 'Z') ? c + 32 : c;
+}
+*/
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	size_t	len;
@@ -33,3 +41,23 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	result[len] = '\0';
 	return (result);
 }
+/*
+int	main(void)
+{
+	const char *orig = "hello world!";
+	char *mod;
+
+	printf("Stringa originale: '%s'\n", orig);
+
+	mod = ft_strmapi(orig, ft_alternate_case);
+	if (!mod)
+	{
+		fprintf(stderr, "Errore nella funzione ft_strmapi.\n");
+		return (1);
+	}
+
+	printf("Stringa modificata: '%s'\n", mod);
+	free(mod);
+
+	return (0);
+}*/

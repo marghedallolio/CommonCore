@@ -31,3 +31,19 @@ char	*ft_strdup(char const *s)
 	dst[i] = '\0';
 	return (dst);
 }
+/*
+int	main(void)
+{
+	const char	*orig = "basta test";
+	char	*dup;
+	printf("stringa originale %s\n", orig);
+	dup = ft_strdup(orig);
+	if(dup)
+	{
+		printf("stringa duplicata: %s\n", dup);
+		free(dup);
+	}
+	else
+		printf("Errore nell'allocazione di memoria. \n");
+	return (0);
+}*/

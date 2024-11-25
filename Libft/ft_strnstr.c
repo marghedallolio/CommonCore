@@ -36,3 +36,18 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	}
 	return (NULL);
 }
+/*
+int	main(void)
+{
+	const char *big1 = "Ciao, come va?";
+	const char *little1 = "come";
+	size_t len1 = 15;
+
+	char *result1 = ft_strnstr(big1, little1, len1);
+
+	if (result1)
+		printf("Test 1: Sottostringa trovata: '%s'\n", result1);
+	else
+		printf("Test 1: Sottostringa non trovata.\n");
+	return (0);
+}*/

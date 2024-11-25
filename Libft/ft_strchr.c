@@ -41,7 +41,8 @@ int	main(void)
 	if (result)
 		printf("stringa: %s, carattere: %c, risultato: %s\n", str, c2, result);
 	else
-		printf("stringa: %s, carattere: %c, risultato: non trovato \n", str, c2);	
+		printf("stringa: %s, carattere: %c, 
+				risultato: non trovato \n", str, c2);	
 		
 	result = ft_strchr(str, c3);
 	if (result)

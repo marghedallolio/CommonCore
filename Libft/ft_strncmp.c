@@ -27,3 +27,23 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
+/*
+int	main(void)
+{
+	const char *str1 = "ciao, come stai?";
+	const char *str2 = "ciao, come va?";
+	size_t n;
+
+	n = 17;
+	printf("Confronto dei primi %zu caratteri:\n", n);
+	printf("Stringa 1: '%s'\n", str1);
+	printf("Stringa 2: '%s'\n", str2);
+	int result = ft_strncmp(str1, str2, n);
+	if (result < 0)
+		printf("Risultato: Stringa 1 è minore di Stringa 2.\n");
+	else if (result > 0)
+		printf("Risultato: Stringa 1 è maggiore di Stringa 2.\n");
+	else
+		printf("Risultato: Stringa 1 è uguale a Stringa 2.\n");
+	return (0);
+}*/

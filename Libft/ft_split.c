@@ -12,58 +12,92 @@
 
 #include "libft.h"
 
-static size_t count_words (char const *s, char c)
+static void	free_all(char **arr, size_t i)
 {
-	int	x;
-	int	flag;
-	int	count;
-	
-	flag = 0;
-	x = 0;
+	while (i > 0)
+		free(arr[--i]);
+	free(arr);
+}
+
+static size_t	count_words(const char *s, char c)
+{
+	size_t	count;
+	int		in_word;
+
 	count = 0;
-	while (s[x] != '\0')
+	in_word = 0;
+	while (*s)
 	{
-		if (s[x] != c)
-			flag = 1;
-		else if (flag == 1);
+		if (*s != c && in_word == 0)
 		{
-			flag = 0;
+			in_word = 1;
 			count++;
 		}
-		x++;
+		else if (*s == c)
+			in_word = 0;
+		s++;
 	}
-	if (flag == 1)
-		count++;
 	return (count);
+}
+
+static char	**compila(char const *s, char **result, char c, size_t word_count)
+{
+	size_t	i;
+	size_t	end;
+	size_t	start;
+
+	start = 0;
+	i = 0;
+	while (i < word_count)
+	{
+		while (s[start] == c)
+			start++;
+		end = start;
+		while (s[end] && s[end] != c)
+			end++;
+		result[i] = ft_substr(s, start, end - start);
+		if (!result[i])
+		{
+			free_all(result, i);
+			return (NULL);
+		}
+		start = end;
+		i++;
+	}
+	result[i] = '\0';
+	return (result);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int	n;
-	int	m;
-	char	*temp;
-	char	**vmp;
-	char	**start;
-	
-	n = 0;
-	m = 0;
-	vmp = (char **)malloc((count_words(s, c) + 1) * sizeof(char *));
-	start = vmp;
-	while (s[n])
-	{
-		temp = (char *)malloc(ft_strlen(s) + 1);
-		while (s[n] != c && s[n] != '\0');
-			temp[m++] = s[n++];
-		if (m > 0)
-		{
-			temp[m] = '\0';
-			*vmp++ = ft_strdup(temp);
-			m = 0;
-		}
-		free(temp);
-		if (s[n])
-			n++;
-	}
-	*vmp = NULL;
-	return (start);
+	char	**result;
+	size_t	word_count;
+
+	if (!s)
+		return (NULL);
+	word_count = count_words(s, c);
+	result = (char *)malloc(sizeof(char *) * (word_count + 1));
+	if (!result)
+		return (NULL);
+	return (compila(s, result, c, word_count));
 }
+/*
+int	main(void)
+{
+	const char *str1 = "Ciao come va?";
+	char **result1 = ft_split(str1, ' ');
+
+	printf("Test 1: Separazione con spazio\n");
+	if (result1)
+	{
+		for (int i = 0; result1[i] != NULL; i++)
+			printf("Parola %d: '%s'\n", i + 1, result1[i]);
+
+		for (int i = 0; result1[i] != NULL; i++)
+			free(result1[i]);
+		free(result1);
+	}
+	else
+		printf("Errore nella separazione della stringa.\n");
+	return (0);
+}*/

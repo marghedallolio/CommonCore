@@ -39,3 +39,17 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 		dest[j] = '\0';
 	return (dest_len + src_len);
 }
+/*
+int	main(void)
+{
+	char	dest[20] = "Ciao, ";
+	const char	*src = "come stai?";
+	size_t	size = 20;
+	size_t	result;
+	
+	printf("dest: %s\n", dest);
+	printf("src: %s\n", src);
+	result = ft_strlcat(dest, src, size);
+	printf("Lunghezza totale risultante: %zu\n", result);
+	return (0);
+}*/

@@ -37,9 +37,11 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	return (dest);
 }
 /*
-int main() {
-    char str[] = "Hello, World!";
+int main()
+{
+    char str[] = "ciao, blabla!";
+    printf("stringa originale: %s\n", str);
     ft_memmove(str + 7, str + 6, 6);
-    printf("Result: %s\n", str);  // Output: "Hello, Worldorld!"
+    printf("Result: %s\n", str);
     return 0;
 }*/

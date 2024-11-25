@@ -59,7 +59,7 @@ int	main(void)
 	if (result)
 	{
 		printf("Stringa concatenata: %s\n", result);
-		free(result); // Liberare la memoria
+		free(result);
 	}
 	else
 	{
