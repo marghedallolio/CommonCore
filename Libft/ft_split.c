@@ -64,7 +64,7 @@ static char	**compila(char const *s, char **result, char c, size_t word_count)
 		start = end;
 		i++;
 	}
-	result[i] = '\0';
+	result[i] = NULL;
 	return (result);
 }
 
