@@ -44,7 +44,7 @@ int	main(void)
 	printf("Destinazione (piccolo): %s\n, Lunghezza buff: %zu\n", sdest, len2);
 	
 	size_t len2 = ft_strlcpy(dest, src, 0);
-	printf("Destinazione (piccolo): %s\n, Lunghezza buff: %zu\n", len3);
+	printf("Destinazione (0): %s\n, Lunghezza buff: %zu\n", len3);
 	
 	return (0);
 }*/
