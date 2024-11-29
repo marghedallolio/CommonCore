@@ -15,12 +15,12 @@
 int	ft_putunsigned(unsigned int n)
 {
 	unsigned int	len;
-	char	c;
+	char			c;
 
 	len = 0;
-	if (n == -2147483648)
-		return (ft_pustr("-2147483648");
-	if(n < 0)
+	if (n == 4294967295)
+		return (ft_pustr("4294967295"));
+	if (n < 0)
 	{
 		len += ft_puchar('-');
 		n = -n;
