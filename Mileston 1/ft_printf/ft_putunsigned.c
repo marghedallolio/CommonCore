@@ -14,19 +14,12 @@
 
 int	ft_putunsigned(unsigned int n)
 {
-	unsigned int	len;
-	char			c;
+	int	len;
+	char	c;
 
 	len = 0;
-	if (n == 4294967295)
-		return (ft_pustr("4294967295"));
-	if (n < 0)
-	{
-		len += ft_puchar('-');
-		n = -n;
-	}
 	if (n > 9)
-		len += ft_putnbr(n / 10);
+		len += ft_putunsigned(n / 10);
 	c = (n % 10) + '0';
 	len += ft_puchar(c);
 	return (len);

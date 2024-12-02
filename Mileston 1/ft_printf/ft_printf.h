@@ -28,4 +28,6 @@ int	ft_putnbr(int n);
 int	ft_putunsigned(unsigned int n);
 int	ft_puthex(unsigned long n, char *base);
 
+
+
 #endif

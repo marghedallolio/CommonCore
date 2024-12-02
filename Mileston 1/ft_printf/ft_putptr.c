@@ -15,7 +15,7 @@
 int	ft_putptr(void *ptr)
 {
 	int	len;
-
+	
 	len = 0;
 	if (!ptr)
 		return (ft_putstr("null"));

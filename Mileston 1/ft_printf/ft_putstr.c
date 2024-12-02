@@ -14,9 +14,9 @@
 
 int	ft_putstr(char *str)
 {
-	int	s;
+	int	len;
 
-	s = 0;
+	len = 0;
 	if (!str)
 		str = "(null)";
 	while (*str)
