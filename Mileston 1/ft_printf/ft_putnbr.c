@@ -22,12 +22,12 @@ int	ft_putnbr(int n)
 		return (ft_putstr("-2147483648"));
 	if (n < 0)
 	{
-		len += ft_puchar('-');
+		len += ft_putchar('-');
 		n = -n;
 	}
 	if (n > 9)
 		len += ft_putnbr(n / 10);
 	c = (n % 10) + '0';
-	len += ft_puchar(c);
+	len += ft_putchar(c);
 	return (len);
 }

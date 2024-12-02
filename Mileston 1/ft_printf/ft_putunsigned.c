@@ -21,6 +21,6 @@ int	ft_putunsigned(unsigned int n)
 	if (n >= 10)
 		len += ft_putunsigned(n / 10);
 	c = (n % 10) + '0';
-	len += ft_puchar(c);
+	len += ft_putchar(c);
 	return (len);
 }
