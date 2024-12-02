@@ -14,7 +14,7 @@
 
 int	ft_putunsigned(unsigned int n)
 {
-	int	len;
+	int		len;
 	char	c;
 
 	len = 0;
