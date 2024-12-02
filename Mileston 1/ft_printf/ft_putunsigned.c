@@ -18,7 +18,7 @@ int	ft_putunsigned(unsigned int n)
 	char	c;
 
 	len = 0;
-	if (n > 9)
+	if (n >= 10)
 		len += ft_putunsigned(n / 10);
 	c = (n % 10) + '0';
 	len += ft_puchar(c);
