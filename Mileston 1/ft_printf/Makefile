@@ -19,8 +19,10 @@ CC = cc
 #flags di compilazione
 CFLAGS = -Wall -Werror -Wextra
 
-#lists dei file sorgente 
+#lists dei file sorgente
 SRC = \
+	ft_printf.c ft_putchar.c ft_puthex.c ft_putnbr.c ft_putptr.c ft_putstr.c \
+	ft_putunsigned.c
 
 #genera il nome dei file oggetto (.o) a partire dai file sorgente (.c)
 OBJ = $(SRC:.c=.o)
