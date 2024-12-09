@@ -63,4 +63,5 @@ fclean: clean
 #ricompilazione completa
 re: fclean all
 
+#dice a make di ignorare qualsiasi file con quel nome e di eseguire sempre la stessa regola associata al target
 .PHONY: all clean fclean re
