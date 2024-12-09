@@ -25,10 +25,11 @@
 # endif
 
 char	*get_next_line(int fd);
+char	*ft_read_to_str(int fd, char *str);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char *s1, char *s2);
-char	*ft_extract_line(char *left_str);
-char	*ft_new_left_str(char *left_str);
+char	*ft_extract_line(char *str);
+char	*ft_new_left_str(char *str);
 size_t	ft_strlen(const char *s);
 
 #endif
