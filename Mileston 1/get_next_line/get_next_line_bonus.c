@@ -1,19 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdalloli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 13:54:46 by mdalloli          #+#    #+#             */
-/*   Updated: 2024/12/02 13:54:48 by mdalloli         ###   ########.fr       */
+/*   Created: 2024/12/09 14:13:05 by mdalloli          #+#    #+#             */
+/*   Updated: 2024/12/09 14:13:08 by mdalloli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-/*legge dal file in un buff e aggiunge i dati a un stringa 
-finche' non trova \n o \0 */
 char	*ft_read_to_str(int fd, char *str)
 {
 	char	*buff;
@@ -38,19 +36,17 @@ char	*ft_read_to_str(int fd, char *str)
 	return (str);
 }
 
-/* gestisce il processo di ottenere una singola riga d un file, mantenendo 
-i dati rimanenti in una variabile statica */
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*str;
+	static char	*str[4096];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	str = ft_read_to_str(fd, str);
-	if (!str)
+	str[fd] = ft_read_to_str(fd, str[fd]);
+	if (!str[fd])
 		return (NULL);
-	line = ft_extract_line(str);
-	str = ft_new_str(str);
+	line = ft_extract_line(str[fd]);
+	str[fd] = ft_new_str(str[fd]);
 	return (line);
 }

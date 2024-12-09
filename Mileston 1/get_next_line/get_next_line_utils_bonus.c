@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdalloli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 13:55:02 by mdalloli          #+#    #+#             */
-/*   Updated: 2024/12/02 13:55:03 by mdalloli         ###   ########.fr       */
+/*   Created: 2024/12/09 14:13:40 by mdalloli          #+#    #+#             */
+/*   Updated: 2024/12/09 14:13:42 by mdalloli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -32,7 +32,7 @@ char	*ft_strchr(char *s, int c)
 	if (!s)
 		return (0);
 	if ((char)c == '\0')
-		return ((char *)s);
+		return ((char *)&s[ft_strlen(s)]);
 	while (s[i] != '\0')
 	{
 		if (s[i] == (char)c)
@@ -70,7 +70,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (result);
 }
 
-/* estrae la stringa, se EOF restituisce \0*/
 char	*ft_extract_line(char *str)
 {
 	int		i;
@@ -99,7 +98,6 @@ char	*ft_extract_line(char *str)
 	return (s);
 }
 
-/* tiene "da parte" la stringa, meno quella estratta */
 char	*ft_new_str(char *str)
 {
 	int		i;
