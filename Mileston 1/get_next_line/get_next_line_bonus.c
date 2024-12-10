@@ -50,3 +50,24 @@ char	*get_next_line(int fd)
 	str[fd] = ft_new_str(str[fd]);
 	return (line);
 }
+/*
+int main(void)
+{
+	int fd;
+	char *line;
+	const char *filename = "tests/test.txt";
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+	{
+		printf("Error opening file");
+		return (1);
+	}
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("%s", line);
+		free(line);
+	}
+	close(fd);
+	return (0);
+}*/
