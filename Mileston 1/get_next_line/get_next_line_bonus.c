@@ -36,6 +36,7 @@ char	*ft_read_to_str(int fd, char *str)
 	return (str);
 }
 
+/*4096 consente la gestione fi file descriptor multipli*/
 char	*get_next_line(int fd)
 {
 	char		*line;
@@ -60,7 +61,7 @@ int main(void)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("Error opening file");
+		printf("Errore nell'apertura del file");
 		return (1);
 	}
 	while ((line = get_next_line(fd)) != NULL)

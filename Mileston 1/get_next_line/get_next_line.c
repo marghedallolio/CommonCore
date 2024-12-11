@@ -64,7 +64,7 @@ int main(void)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("Error opening file");
+		printf("Errore nell'apertura del file");
 		return (1);
 	}
 	while ((line = get_next_line(fd)) != NULL)
