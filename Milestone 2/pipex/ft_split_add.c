@@ -57,7 +57,7 @@ void	copy(char *str, char **arr, char c)
 	arr[++y] = NULL;
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin2(char *s1, char *s2)
 {
 	int		len_s1;
 	int		len_s2;
@@ -94,7 +94,7 @@ char	**ft_split_add(char *str, char *add, char c)
 	copy(str, arr, c);
 	while (--i >= 0 && add != NULL)
 	{
-		temp = ft_strjoin(arr[i], add);
+		temp = ft_strjoin2(arr[i], add);
 		free(arr[i]);
 		arr[i] = temp;
 	}

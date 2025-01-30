@@ -12,19 +12,6 @@
 
 #include "pipex.h"
 
-/*restituisce la lunghezza di una stringa*/
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
 /*duplica una stringa a partire da start*/
 char	*dupstr(char *str, int start)
 {

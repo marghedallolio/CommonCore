@@ -11,11 +11,11 @@
 # **************************************************************************** #
 
 #nome della libreria
-NAME = pipex
+NAME = pipex.a
 FT_PRINTF = ft_printf/ft_printf.a
-DIR_FT_PRINTF = ft_printf
+DIR_FT_PRINTF = ft_printf/
 GET_NEXT_LINE = get_next_line/get_next_line.a
-DIR_GET_NEXT_LINE = get_next_line
+DIR_GET_NEXT_LINE = get_next_line/
 
 #compilatore
 CC = cc
@@ -24,19 +24,17 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 #lista dei file sorgente
-SRC = 	pipex.c pipex_utils.c ft_split_add.c\
-		get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
-
+SRC = 	pipex.c pipex_utils.c ft_split_add.c \
+	get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
 #genera il nome dei file oggetto (.o) a partire ai file sorgente (.c)
 OBJ = $(SRC:.c=.o)
 
 #regola principale per creare l'eseguibile
-all: $(NAME)
-
-# Creazione dell'eseguibile
-$(NAME): $(FT_PRINTF) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(FT_PRINTF) -o $(NAME)
+all: $(NAME) $(FT_PRINTF)
+	$(CC) pipex.c $(NAME) $(FT_PRINTF) $(CFLAGS) -o "pipex"
+	@$(MAKE) fclean -C $(DIR_FT_PRINTF)
+	@make fclean
 
 # Creazione della libreria ft_printf
 $(FT_PRINTF):
@@ -61,4 +59,4 @@ fclean: clean
 #ricompilazione completa
 re: fclean all
 
-.PHONY: all clean fclean re
+#.PHONY: all clean fclean re

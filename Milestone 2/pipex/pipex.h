@@ -18,13 +18,14 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include "get_next_line/get_next_line.h"
 
-char	*get_next_line(int fd);
 char	**ft_split_add(char *str, char *add, char c);
 char	*dupstr(char *str, int start);
-int		ft_printf(const char *format, ...);
+char	*get_next_line(int fd);
 int		confronta(char *s1, char *s2, int start, int end);
-int		ft_strlen(char *str);
+int		ft_printf(const char *n, ...);
+int		ft_slen(char *str);
 int		check_output(char **av, int ac);
 int		check_input(char **av);
 

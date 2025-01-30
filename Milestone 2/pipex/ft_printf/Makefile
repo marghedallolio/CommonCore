@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 #nome della libreria
-NAME = libftprintf.a
+NAME = ft_printf.a
 
 #compilatore
 CC = cc
