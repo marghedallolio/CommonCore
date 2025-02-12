@@ -63,7 +63,7 @@ void	process(char *command, char **env)
 	{
 		free(path);
 		free_arr(arg);
-		ft_printf("Error, no process\n");
+		ft_putstr_fd("Error, no process", 2);
 		exit (EXIT_FAILURE);
 	}
 	free(path);

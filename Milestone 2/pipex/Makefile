@@ -14,8 +14,8 @@
 
 #nome della libreria
 NAME = pipex
-FT_PRINTF = ft_printf/ft_printf.a
-DIR_FT_PRINTF = ft_printf/
+LIBFT = libft_printf/libft_printf.a
+DIR_LIBFT = libft_printf/
 
 #compilatore
 CC = cc
@@ -24,8 +24,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 #lista dei file sorgente
-SRC = 	pipex.c pipex_utils.c ft_split_add.c \
-	get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+SRC = 	pipex.c pipex_utils.c ft_split_add.c 
 
 #genera il nome dei file oggetto (.o) a partire ai file sorgente (.c)
 OBJ = $(SRC:.c=.o)
@@ -35,14 +34,14 @@ all: $(NAME)
 
 
 # Creazione della libreria ft_printf
-$(FT_PRINTF):
-	make -C $(DIR_FT_PRINTF)
+$(LIBFT):
+	make -C $(DIR_LIBFT)
 
 #creazione libreria
-$(NAME):	$(OBJ) $(FT_PRINTF)
-	$(CC) $(CFLAGS) $(OBJ) $(FT_PRINTF) -o $(NAME) 
+$(NAME):	$(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) 
 	make clean
-	make -C $(DIR_FT_PRINTF) fclean
+	make -C $(DIR_LIBFT) fclean
 
 #compilazione dei file sorgente
 %.o: %.c
@@ -50,12 +49,12 @@ $(NAME):	$(OBJ) $(FT_PRINTF)
 
 #pulizia dei file oggetto
 clean:
-	make -C $(DIR_FT_PRINTF) clean
+	make -C $(DIR_LIBFT) clean
 	rm -rf $(OBJ)
 
 #rimozione di file oggetto e libreria
 fclean: clean
-	make -C $(DIR_FT_PRINTF) fclean
+	make -C $(DIR_LIBFT) fclean
 	rm -rf $(NAME)
 
 

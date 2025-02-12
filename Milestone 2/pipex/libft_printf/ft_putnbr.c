@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putptr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdalloli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 15:55:47 by mdalloli          #+#    #+#             */
-/*   Updated: 2024/11/29 15:55:49 by mdalloli         ###   ########.fr       */
+/*   Created: 2024/11/29 13:42:30 by mdalloli          #+#    #+#             */
+/*   Updated: 2024/11/29 13:42:32 by mdalloli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft_printf.h"
 
-int	ft_putptr(void *ptr)
+int	ft_putnbr(int n)
 {
-	int	len;
+	int		len;
+	char	c;
 
 	len = 0;
-	if (!ptr)
-		return (ft_putstr("(nil)"));
-	len += ft_putstr("0x");
-	len += ft_puthex((unsigned long)ptr, 0);
+	if (n == -2147483648)
+		return (ft_putstr("-2147483648"));
+	if (n < 0)
+	{
+		len += ft_putchar('-');
+		n = -n;
+	}
+	if (n > 9)
+		len += ft_putnbr(n / 10);
+	c = (n % 10) + '0';
+	len += ft_putchar(c);
 	return (len);
 }
