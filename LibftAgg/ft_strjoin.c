@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_printf.h"
 
 static void	ft_strconcat(char *dest, const char *s1, const char *s2)
 {

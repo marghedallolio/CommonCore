@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_printf.h"
 /*
 char	ft_alternate_case(unsigned int i, char c)
 {
