@@ -10,8 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
+.SILENT:
+
 #nome della libreria
-NAME = pipex.a
+NAME = pipex
 FT_PRINTF = ft_printf/ft_printf.a
 DIR_FT_PRINTF = ft_printf/
 GET_NEXT_LINE = get_next_line/get_next_line.a
@@ -31,17 +33,18 @@ SRC = 	pipex.c pipex_utils.c ft_split_add.c \
 OBJ = $(SRC:.c=.o)
 
 #regola principale per creare l'eseguibile
-all: $(NAME) $(FT_PRINTF)
-	$(CC) pipex.c $(NAME) $(FT_PRINTF) $(CFLAGS) -o "pipex"
-	@$(MAKE) fclean -C $(DIR_FT_PRINTF)
-	@make fclean
+all: $(NAME) 
+
 
 # Creazione della libreria ft_printf
 $(FT_PRINTF):
-	$(MAKE) -C $(DIR_FT_PRINTF)
+	make -C $(DIR_FT_PRINTF)
 
-$(NAME):	$(OBJ)
-	@ar rcs $(NAME) $(OBJ)
+#creazione libreria
+$(NAME):	$(OBJ) $(FT_PRINTF)
+	$(CC) $(CFLAGS) $(OBJ) $(FT_PRINTF) -o $(NAME) 
+	make clean
+	make -C $(DIR_FT_PRINTF) fclean
 
 #compilazione dei file sorgente
 %.o: %.c
@@ -49,10 +52,12 @@ $(NAME):	$(OBJ)
 
 #pulizia dei file oggetto
 clean:
+	make -C $(DIR_FT_PRINTF) clean
 	rm -rf $(OBJ)
 
 #rimozione di file oggetto e libreria
 fclean: clean
+	make -C $(DIR_FT_PRINTF) fclean
 	rm -rf $(NAME)
 
 

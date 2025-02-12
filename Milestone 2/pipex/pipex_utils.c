@@ -18,6 +18,8 @@ char	*dupstr(char *str, int start)
 	char	*app;
 	int		i;
 
+	if (start >= ft_strlen(str))
+		return (NULL);
 	app = malloc(ft_strlen(str) + 1 - start);
 	i = -1;
 	while (str[start])
@@ -34,7 +36,8 @@ int	confronta(char *s1, char *s2, int start, int end)
 {
 	int	i;
 
-	if (start < 0 || (start >= end && end != -1))
+	if (end != -1 && (start < 0 || start >= end
+			|| end > ft_strlen(s1) || end > ft_strlen(s2)))
 		return (-1);
 	i = start - 1;
 	if (end == -1)
@@ -65,29 +68,12 @@ restituisce il file descriptor per il file di input o
 0 per il caso di here_doc*/
 int	check_input(char **av)
 {
-	int		fd_in;
-	int		pip[2];
-	char	*buf;
+	int	fd_in;
 
-	if (confronta(av[1], "here_doc", 0, -1))
-	{
-		pipe(pip);
-		ft_printf("pipe heredoc> ");
-		buf = get_next_line(0);
-		while (confronta(buf, av[2], 0, ft_strlen(av[2])) == 0)
-		{
-			write(pip[1], buf, ft_strlen(buf));
-			ft_printf("pipe heredoc> ");
-			buf = get_next_line(0);
-		}
-		close(pip[1]);
-		if (dup2(pip[0], 0) == -1)
-			return (ft_printf("Error\nbad input dup\n"), 0);
-		return (0);
-	}
 	fd_in = open(av[1], O_RDWR);
 	if (dup2(fd_in, 0) == -1)
-		return (ft_printf("Error\nbad input dup\n"), 0);
+		return (ft_printf("Error, bad input dup\n"), 0);
+	close(fd_in);
 	return (fd_in);
 }
 
@@ -97,13 +83,11 @@ altrimenti apre il file di output in mod truncate
 restituisce il file descriptor per il file di output*/
 int	check_output(char **av, int ac)
 {
-	int		fd_out;
+	int	fd_out;
 
-	if (confronta(av[1], "here_doc", 0, -1))
-	{
-		fd_out = open(av[ac - 1], O_RDWR | O_CREAT | O_APPEND, 0777);
-		return (fd_out);
-	}
 	fd_out = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0777);
+	if (fd_out == -1)
+		return (ft_printf("Error, failed to open input file\n"), -1);
+	return (fd_out);
 	return (fd_out);
 }

@@ -63,7 +63,7 @@ void	process(char *command, char **env)
 	{
 		free(path);
 		free_arr(arg);
-		ft_printf("Error\nno process\n");
+		ft_printf("Error, no process\n");
 		exit (EXIT_FAILURE);
 	}
 	free(path);
@@ -83,14 +83,14 @@ int	cicle(char *cmd, char **env)
 	{
 		close(pip[0]);
 		if (dup2(pip[1], STDOUT_FILENO) == -1)
-			return (ft_printf("Error\nbad dup\n"), 0);
+			return (ft_printf("Error, bad dup\n"), 0);
 		process(cmd, env);
 	}
 	else
 	{
 		close(pip[1]);
 		if (dup2(pip[0], STDIN_FILENO) == -1)
-			return (ft_printf("Error\nbad dup\n"), 0);
+			return (ft_printf("Error, bad dup\n"), 0);
 	}
 	return (1);
 }
@@ -104,20 +104,18 @@ int	main(int ac, char **av, char **env)
 	int		fd_out;
 	int		fd_in;
 
-	if (ac < 4)
-		return (ft_printf("Error\ntoo few arguments\n"), 0);
+	if (ac <= 4)
+		return (ft_printf("Error, too few argoments\n"), 127);
 	fd_in = check_input(av);
 	fd_out = check_output(av, ac);
 	if (fd_in == -1 || fd_out == -1)
-		return (ft_printf("Error\nfile not opened\n"), 0);
+		return (ft_printf("Error, file not opened\n"), 127);
 	i = 1;
-	if (confronta(av[1], "here_doc", 0, -1))
-		i = 2;
 	while (++i < ac - 2)
 		if (cicle(av[i], env) == 0)
-			return (ft_printf("Error\nbad input dup\n"), 0);
+			return (ft_printf("Error, bad input dup\n"), 127);
 	if (dup2(fd_out, 1) == -1)
-		return (ft_printf("Error\nbad output dup\n"), 0);
+		return (ft_printf("Error, bad output dup\n"), 127);
 	process(av[i], env);
 	return (0);
 }
