@@ -16,8 +16,6 @@
 NAME = pipex
 FT_PRINTF = ft_printf/ft_printf.a
 DIR_FT_PRINTF = ft_printf/
-GET_NEXT_LINE = get_next_line/get_next_line.a
-DIR_GET_NEXT_LINE = get_next_line/
 
 #compilatore
 CC = cc
