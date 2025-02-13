@@ -22,7 +22,7 @@ Examples:
 
 int     *ft_rrange(int start, int end)
 {
-	int	*size = end - start;
+	int	size = end - start;
 	int	*arr;
 	int	i = 0;
 	int	num;

@@ -36,19 +36,6 @@ void    ft_putnbr(int n)
     write(1, &c, 1);
 }
 
-int     ft_atoi(const char *str)
-{
-    int i = 0;
-    int res = 0;
-
-    while (str[i] >= '0' && str[i] <= '9')
-    {
-        res = res * 10 + (str[i] - '0');
-        i++;
-    }
-    return (res);
-}
-
 int     is_prime(int n)
 {
     if (n < 2)
