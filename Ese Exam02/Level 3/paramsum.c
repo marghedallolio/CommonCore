@@ -20,15 +20,20 @@ $>*/
 
 #include <unistd.h>
 
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
 static void	ft_smallputnbr(int n)
 {
 	if (n > 9)
 	{
-		ft_small_put_nbr(number / 10);
-		ft_small_put_nbr(number % 10);
+		ft_smallputnbr(n / 10);
+		ft_smallputnbr(n % 10);
 	}
 	else
-		ft_putchar_fd((number + '0'), STDOUT_FILENO);
+		ft_putchar_fd((n + '0'), STDOUT_FILENO);
 }
 
 int	main(int argc, char **argv)
@@ -38,4 +43,3 @@ int	main(int argc, char **argv)
 	write(1, "\n", 1);
 	return (0);
 }
-DA METTERE A POSTO
