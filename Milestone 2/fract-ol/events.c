@@ -27,6 +27,10 @@ int	handle_mouse(int button, int x, int y, t_data *data)
 		data->zoom *= 1.1;
 	else if (button == 5)
 		data->zoom /= 1.1;
+	if (!ft_strcmp(data->fractal, "mandelbrot"))
+		draw_mandelbrot(data);
+	else if (!ft_strcmp(data->fractal, "julia"))
+		draw_julia(data);
 	draw_mandelbrot(data);
 	return (0);
 }

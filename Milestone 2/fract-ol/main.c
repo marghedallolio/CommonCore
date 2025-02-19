@@ -25,8 +25,20 @@ static void	init_data(t_data *data)
 void	start_fractol(char *fractal)
 {
 	t_data data;
+
 	data.mlx = mlx_init(); //inizializza MiniLibX
+	if (!data.mlx)
+	{
+		ft_printf("Errore inizializzazione MiniLibX\n");
+		exit(1);
+	}
 	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Fract'ol"); //crea una finestra
+	if (!data.win)
+	{
+		ft_printf("Errore creazione finestra\n");
+		exit(1);
+	}
+	data.addr = mlx_get_data_addr(data.img, &data.bpp, &data.line_len, &data.endian); //ottiene l'indirizzo dell'immagine
 	init_data(&data);
 	if (!ft_strcmp(fractal, "mandelbrot")) //controlla quale frattale disegnare
 		draw_mandelbrot(&data);
