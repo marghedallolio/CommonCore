@@ -24,9 +24,9 @@
 # define WIDTH 800
 # define HEIGHT 800
 # define MAX_ITER 100
-# define COLOR1 0x1E90FF
-# define COLOR2 0x228B22
-# define COLOR3 0xFFD700
+# define COLOR_1 0xFF4500
+# define COLOR_2 0xFF00FF
+# define COLOR_3 0x0000FF 
 
 typedef struct s_data
 {
@@ -52,6 +52,7 @@ void	draw_mandelbrot(t_data *data);
 void	draw_julia(t_data *data);
 void	put_pixel(t_data *data, int x, int y, int color);
 void	cleanup(t_data *data);
+int		get_color(int iter);
 int		handle_keys(int key, t_data *data);
 int		handle_mouse(int button, int x, int y, t_data *data);
 int		render_frame(t_data *data);

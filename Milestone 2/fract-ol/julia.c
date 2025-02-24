@@ -12,6 +12,16 @@
 
 #include "fractol.h"
 
+double	get_zx(int x, t_data *data)
+{
+	return ((x - WIDTH / 2.0) * 4.0 / WIDTH * data->zoom + data->move_x);
+}
+
+double	get_zy(int y, t_data *data)
+{
+	return ((y - HEIGHT / 2.0) * 4.0 / HEIGHT * data->zoom + data->move_y);
+}
+
 static int	julia_iter(double zx, double zy, double cx, double cy)
 {
 	double	tmp;
@@ -33,6 +43,7 @@ void	draw_julia(t_data *data)
 	int		x;
 	int		y;
 	int		iter;
+	int		color;
 	double	zx;
 	double	zy;
 
@@ -42,10 +53,12 @@ void	draw_julia(t_data *data)
 		x = 0;
 		while (x < WIDTH)
 		{
-			zx = (x - WIDTH / 2.0) * 4.0 / WIDTH * data->zoom + data->move_x;
-			zy = (y - HEIGHT / 2.0) * 4.0 / HEIGHT * data->zoom + data->move_y;
+
+			zx = get_zx(x, data);
+			zy = get_zy(y, data);
 			iter = julia_iter(zx, zy, data->julia_cx, data->julia_cy);
-			put_pixel(data, x, y, iter * 0x0000FF);
+			color = get_color(iter);
+			put_pixel(data, x, y, color);
 			x++;
 		}
 		y++;

@@ -22,3 +22,13 @@ void	put_pixel(t_data *data, int x, int y, int color)
 		*(unsigned int *)dst = color;
 	}
 }
+
+int	get_color(int iter)
+{
+	if (iter < 50)
+		return (COLOR_1);
+	else if (iter < 100)
+		return (COLOR_2);
+	else
+		return (COLOR_3);
+}
