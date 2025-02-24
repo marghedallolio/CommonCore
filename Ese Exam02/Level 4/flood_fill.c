@@ -83,3 +83,84 @@ F00F000F
 F0FF000F
 FFF0000F
 $>*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+typedef struct  s_point
+  {
+    int           x;
+    int           y;
+  }               t_point;
+
+void flood_fill_recursive(char **tab, t_point size, int x, int y, char target)
+{
+	// controllo se siamo fuori dai limiti della matrice
+	if (x < 0 || x >= size.x || y < 0 || y >= size.y || tab[y][x] != target)
+		return;
+	tab[y][x] = 'F'; // fill the current cell
+	flood_fill_recursive(tab, size, x + 1, y, target); // go right
+	flood_fill_recursive(tab, size, x - 1, y, target); // go left
+	flood_fill_recursive(tab, size, x, y + 1, target); // go down
+	flood_fill_recursive(tab, size, x, y - 1, target); // go up
+}
+
+void flood_fill(char **tab, t_point size, t_point begin)
+{
+	//controllo se il punto di inizio è fuori dai limiti
+	if (begin.x < 0 || begin.x >= size.x || begin.y < 0 || begin.y >= size.y )
+		return;
+	char target = tab[begin.y][begin.x]; //memorizza il carattere di partenza
+	//se il carattere iniziale è gia 'F', non ha senso riempire
+	if (target == 'F')
+		return;
+	flood_fill_recursive(tab, size, begin.x, begin.y, target);  //avvia la ricorsione 
+}
+
+char	**make_area(char** zone, t_point size)
+{
+	  char** new;
+  
+	  new = malloc(sizeof(char*) * size.y);
+	  for (int i = 0; i < size.y; ++i)
+	  {
+		  new[i] = malloc(size.x + 1);
+		  for (int j = 0; j < size.x; ++j)
+			  new[i][j] = zone[i][j];
+		  new[i][size.x] = '\0';
+	  }
+  
+	  return new;
+}
+
+void free_area(char **area, t_point size)
+{
+	for (int i = 0; i < size.y; ++i)
+		free(area[i]);
+	free(area);
+}
+
+int	main(void)
+{
+	t_point size = {8, 5};
+	char *zone[] = {
+		"11111111",
+		"10001001",
+		"10010001",
+		"10110001",
+		"11100001",
+	};
+
+	char**  area = make_area(zone, size);
+	for (int i = 0; i < size.y; ++i)
+		printf("%s\n", area[i]);
+	printf("\n");
+
+	t_point begin = {7, 4};
+	flood_fill(area, size, begin);
+	for (int i = 0; i < size.y; ++i)
+		printf("%s\n", area[i]);
+	free_area(area, size);
+	return (0);
+}

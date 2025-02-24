@@ -46,7 +46,10 @@ typedef struct s_data
     double  julia_cx;   // Parametro Cx per Julia
     double  julia_cy;   // Parametro Cy per Julia
     char    *fractal;   // Tipo di frattale
+<<<<<<< HEAD
     int     needs_redraw;
+=======
+>>>>>>> ab1c3f48ff4c0145ab475810f7bf994c41915558
 }   t_data;
 
 void	start_fractol(char *fractal);

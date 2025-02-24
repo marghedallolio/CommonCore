@@ -21,6 +21,7 @@ int handle_keys(int key, t_data *data)
 
 int	handle_mouse(int button, int x, int y, t_data *data)
 {
+<<<<<<< HEAD
 	double	mouse_x;
 	double	mouse_y;
 	double	zoom_factor;
@@ -47,6 +48,19 @@ int	handle_mouse(int button, int x, int y, t_data *data)
 	data->move_y = mouse_y - (y - HEIGHT / 2.0) * 4.0 / HEIGHT * data->zoom;
 
 	data->needs_redraw = 1; // Indica che bisogna ridisegnare
+=======
+	(void)x;
+	(void)y;
+	if (button == 4)
+		data->zoom *= 1.1;
+	else if (button == 5)
+		data->zoom /= 1.1;
+	if (!ft_strcmp(data->fractal, "mandelbrot"))
+		draw_mandelbrot(data);
+	else if (!ft_strcmp(data->fractal, "julia"))
+		draw_julia(data);
+	draw_mandelbrot(data);
+>>>>>>> ab1c3f48ff4c0145ab475810f7bf994c41915558
 	return (0);
 }
 
