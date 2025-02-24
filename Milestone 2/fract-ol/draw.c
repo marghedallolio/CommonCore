@@ -22,4 +22,3 @@ void	put_pixel(t_data *data, int x, int y, int color)
 		*(unsigned int *)dst = color;
 	}
 }
-

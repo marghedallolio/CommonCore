@@ -12,11 +12,11 @@
 
 #include "fractol.h"
 
-int handle_keys(int key, t_data *data)
+int	handle_keys(int key, t_data *data)
 {
-    if (key == 65307)
-        cleanup(data);
-    return (0);
+	if (key == 65307)
+		cleanup(data);
+	return (0);
 }
 
 int	handle_mouse(int button, int x, int y, t_data *data)
@@ -27,28 +27,19 @@ int	handle_mouse(int button, int x, int y, t_data *data)
 
 	if (!data || !data->fractal)
 		return (0);
-
 	// Converti la posizione del mouse nel sistema di coordinate del frattale
 	mouse_x = (x - WIDTH / 2.0) * 4.0 / WIDTH * data->zoom + data->move_x;
 	mouse_y = (y - HEIGHT / 2.0) * 4.0 / HEIGHT * data->zoom + data->move_y;
-
 	if (button == 4) // Zoom in
 		zoom_factor = 1.1;
 	else if (button == 5) // Zoom out
 		zoom_factor = 1 / 1.1;
 	else
 		return (0);
-
-	// Aggiorna lo zoom
-	data->zoom *= zoom_factor;
-
+	data->zoom *= zoom_factor; // Aggiorna lo zoom
 	// Modifica move_x e move_y per mantenere il punto sotto il mouse fisso
 	data->move_x = mouse_x - (x - WIDTH / 2.0) * 4.0 / WIDTH * data->zoom;
 	data->move_y = mouse_y - (y - HEIGHT / 2.0) * 4.0 / HEIGHT * data->zoom;
-
 	data->needs_redraw = 1; // Indica che bisogna ridisegnare
 	return (0);
 }
-
-
-
