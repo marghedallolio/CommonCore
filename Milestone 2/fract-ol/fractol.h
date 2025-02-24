@@ -21,16 +21,15 @@
 # include "ft_printf/ft_printf.h"
 # include "mlx/mlx.h"
 
-# define WIDTH 800   // Larghezza finestra
-# define HEIGHT 800  // Altezza finestra
-# define MAX_ITER 100 // Numero massimo di iterazioni
+# define WIDTH 800
+# define HEIGHT 800
+# define MAX_ITER 100
 
-// Colori (puoi personalizzarli)
-# define COLOR1 0x0000FF  // Blu
-# define COLOR2 0x00FF00  // Verde
-# define COLOR3 0xFF0000  // Rosso
+# define COLOR1 0x1E90FF // Blu
+# define COLOR2 0x228B22  // Verde
+# define COLOR3 0xFFD700  // Giallo
 
-//struttura dati principale per il programma
+
 typedef struct s_data
 {
     void    *mlx;       // Puntatore a MiniLibX
@@ -46,14 +45,18 @@ typedef struct s_data
     int     max_iter;   // Numero massimo di iterazioni
     double  julia_cx;   // Parametro Cx per Julia
     double  julia_cy;   // Parametro Cy per Julia
+    char    *fractal;   // Tipo di frattale
+    int     needs_redraw;
 }   t_data;
 
 void	start_fractol(char *fractal);
 void	draw_mandelbrot(t_data *data);
 void	draw_julia(t_data *data);
 void	put_pixel(t_data *data, int x, int y, int color);
-int		handle_keys(int key);
+void    cleanup(t_data *data);
+int     handle_keys(int key, t_data *data);
 int		handle_mouse(int button, int x, int y, t_data *data);
+int     render_frame(t_data *data);
 int		ft_strcmp(char *s1, char *s2);
 
 #endif

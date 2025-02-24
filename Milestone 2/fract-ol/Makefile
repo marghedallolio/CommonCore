@@ -26,7 +26,7 @@ CFLAGS = -Wall -Werror -Wextra
 MLXFLAGS = -Lmlx -lXext -lm -lmlx -lX11
 
 #File sorgenti
-SRC = main.c utils.c julia.c mandelbrot.c draw.c events.c fractals.c
+SRC = main.c utils.c julia.c mandelbrot.c draw.c events.c
 
 #genera il nome dei file oggetto (.o) a partire ai file sorgente (.c)
 OBJ = $(SRC:.c=.o)
@@ -45,9 +45,6 @@ $(FT_PRINTF):
 #creazione libreria
 $(NAME): $(OBJ) $(MLX) $(FT_PRINTF)
 	$(CC) $(CFLAGS) $(OBJ) $(MLX) $(FT_PRINTF) -o $(NAME) $(MLXFLAGS)
-	make clean
-	make -C $(DIR_MLX) fclean
-	make -C $(DIR_FT_PRINTF) fclean
 
 #compilazione dei file sorgente
 %.o: %.c
@@ -61,10 +58,7 @@ clean:
 
 #rimozione di file oggetto e libreria
 fclean: clean
-	make -C $(DIR_MLX) fclean
-	make -C $(DIR_FT_PRINTF) fclean
 	rm -rf $(NAME)
 
 #ricompilazione completa
 re: fclean all
-

@@ -33,24 +33,23 @@ static int	mandelbrot_iter(double cx, double cy)
 	return (iter);
 }
 
-void	draw_mandelbrot(t_data *data)
+void draw_mandelbrot(t_data *data)
 {
-	int		x;
-	int		y;
-	double	cx;
-	double	cy;
-	int		iter;
+    int x, y, iter;
+    double cx, cy;
 
-	y = -1;
-	while (++y < HEIGHT)
-	{
-		x = -1;
-		while (++x < WIDTH)
-		{
-			cx = (x - WIDTH / 2.0) * 4.0 / WIDTH * data->zoom + data->move_x;
-			cy = (y - HEIGHT / 2.0) * 4.0 / HEIGHT * data->zoom + data->move_y;
-			iter = mandelbrot_iter(cx, cy);
-			put_pixel(data, x, y, iter * 0x00FF00);
-		}
-	}
+    y = 0;
+    while (y < HEIGHT)
+    {
+        x = 0;
+        while (x < WIDTH)
+        {
+            cx = (x - WIDTH / 2.0) * 4.0 / WIDTH * data->zoom + data->move_x;
+            cy = (y - HEIGHT / 2.0) * 4.0 / HEIGHT * data->zoom + data->move_y;
+            iter = mandelbrot_iter(cx, cy);
+            put_pixel(data, x, y, iter * 0x00FF00);
+            x++;
+        }
+        y++;
+    }
 }
