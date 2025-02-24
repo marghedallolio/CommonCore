@@ -28,24 +28,26 @@ static int	julia_iter(double zx, double zy, double cx, double cy)
 	return (iter);
 }
 
-void draw_julia(t_data *data)
+void	draw_julia(t_data *data)
 {
-    int x, y, iter;
-    double zx, zy;
+	int		x;
+	int		y;
+	int		iter;
+	double	zx;
+	double	zy;
 
-    y = 0;
-    while (y < HEIGHT)
-    {
-        x = 0;
-        while (x < WIDTH)
-        {
-            zx = (x - WIDTH / 2.0) * 4.0 / WIDTH * data->zoom + data->move_x;
-            zy = (y - HEIGHT / 2.0) * 4.0 / HEIGHT * data->zoom + data->move_y;
-            iter = julia_iter(zx, zy, data->julia_cx, data->julia_cy);
-            put_pixel(data, x, y, iter * 0x0000FF);
-            x++;
-        }
-        y++;
-    }
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			zx = (x - WIDTH / 2.0) * 4.0 / WIDTH * data->zoom + data->move_x;
+			zy = (y - HEIGHT / 2.0) * 4.0 / HEIGHT * data->zoom + data->move_y;
+			iter = julia_iter(zx, zy, data->julia_cx, data->julia_cy);
+			put_pixel(data, x, y, iter * 0x0000FF);
+			x++;
+		}
+		y++;
+	}
 }
-

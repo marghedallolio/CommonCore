@@ -27,19 +27,17 @@ int	handle_mouse(int button, int x, int y, t_data *data)
 
 	if (!data || !data->fractal)
 		return (0);
-	// Converti la posizione del mouse nel sistema di coordinate del frattale
 	mouse_x = (x - WIDTH / 2.0) * 4.0 / WIDTH * data->zoom + data->move_x;
 	mouse_y = (y - HEIGHT / 2.0) * 4.0 / HEIGHT * data->zoom + data->move_y;
-	if (button == 4) // Zoom in
+	if (button == 4)
 		zoom_factor = 1.1;
-	else if (button == 5) // Zoom out
+	else if (button == 5)
 		zoom_factor = 1 / 1.1;
 	else
 		return (0);
-	data->zoom *= zoom_factor; // Aggiorna lo zoom
-	// Modifica move_x e move_y per mantenere il punto sotto il mouse fisso
+	data->zoom *= zoom_factor;
 	data->move_x = mouse_x - (x - WIDTH / 2.0) * 4.0 / WIDTH * data->zoom;
 	data->move_y = mouse_y - (y - HEIGHT / 2.0) * 4.0 / HEIGHT * data->zoom;
-	data->needs_redraw = 1; // Indica che bisogna ridisegnare
+	data->needs_redraw = 1;
 	return (0);
 }

@@ -12,7 +12,6 @@
 
 #include "fractol.h"
 
-
 static int	mandelbrot_iter(double cx, double cy)
 {
 	double	zx;
@@ -33,23 +32,26 @@ static int	mandelbrot_iter(double cx, double cy)
 	return (iter);
 }
 
-void draw_mandelbrot(t_data *data)
+void	draw_mandelbrot(t_data *data)
 {
-    int x, y, iter;
-    double cx, cy;
+	int		x;
+	int		y;
+	int		iter;
+	double	cx;
+	double	cy;
 
-    y = 0;
-    while (y < HEIGHT)
-    {
-        x = 0;
-        while (x < WIDTH)
-        {
-            cx = (x - WIDTH / 2.0) * 4.0 / WIDTH * data->zoom + data->move_x;
-            cy = (y - HEIGHT / 2.0) * 4.0 / HEIGHT * data->zoom + data->move_y;
-            iter = mandelbrot_iter(cx, cy);
-            put_pixel(data, x, y, iter * 0x00FF00);
-            x++;
-        }
-        y++;
-    }
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			cx = (x - WIDTH / 2.0) * 4.0 / WIDTH * data->zoom + data->move_x;
+			cy = (y - HEIGHT / 2.0) * 4.0 / HEIGHT * data->zoom + data->move_y;
+			iter = mandelbrot_iter(cx, cy);
+			put_pixel(data, x, y, iter * 0x00FF00);
+			x++;
+		}
+		y++;
+	}
 }

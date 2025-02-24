@@ -24,39 +24,37 @@
 # define WIDTH 800
 # define HEIGHT 800
 # define MAX_ITER 100
-
-# define COLOR1 0x1E90FF // Blu
-# define COLOR2 0x228B22  // Verde
-# define COLOR3 0xFFD700  // Giallo
-
+# define COLOR1 0x1E90FF
+# define COLOR2 0x228B22
+# define COLOR3 0xFFD700
 
 typedef struct s_data
 {
-    void    *mlx;       // Puntatore a MiniLibX
-    void    *win;       // Finestra MiniLibX
-    void    *img;       // Immagine MiniLibX
-    char    *addr;      // Indirizzo della memoria dell'immagine
-    int     bpp;
-    int     line_len;
-    int     endian;
-    double  zoom;       // Zoom
-    double  move_x;     // Spostamento sull'asse X
-    double  move_y;     // Spostamento sull'asse Y
-    int     max_iter;   // Numero massimo di iterazioni
-    double  julia_cx;   // Parametro Cx per Julia
-    double  julia_cy;   // Parametro Cy per Julia
-    char    *fractal;   // Tipo di frattale
-    int     needs_redraw;
-}   t_data;
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	double	zoom;
+	double	move_x;
+	double	move_y;
+	int		max_iter;
+	double	julia_cx;
+	double	julia_cy;
+	char	*fractal;
+	int		needs_redraw;
+}	t_data;
 
 void	start_fractol(char *fractal);
 void	draw_mandelbrot(t_data *data);
 void	draw_julia(t_data *data);
 void	put_pixel(t_data *data, int x, int y, int color);
-void    cleanup(t_data *data);
-int     handle_keys(int key, t_data *data);
+void	cleanup(t_data *data);
+int		handle_keys(int key, t_data *data);
 int		handle_mouse(int button, int x, int y, t_data *data);
-int     render_frame(t_data *data);
+int		render_frame(t_data *data);
 int		ft_strcmp(char *s1, char *s2);
 
 #endif
