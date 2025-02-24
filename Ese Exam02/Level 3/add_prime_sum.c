@@ -30,22 +30,25 @@ void	ft_putchar(char c)
 
 void    ft_putnbr(int n)
 {
-    if (n > 9)
-        ft_putnbr(n / 10);
-    char c = (n % 10) + '0';
-    write(1, &c, 1);
+	if (n > 9)
+		ft_putnbr(n / 10);
+	char c = (n % 10) + '0';
+	write(1, &c, 1);
 }
 
 int     is_prime(int n)
 {
-    if (n < 2)
-        return 0;
-    for (int i = 2; i * i <= n; i++)
-    {
-        if (n % i == 0)
-            return 0;
-    }
-    return 1;
+	int i;
+	if (n < 2)
+		return 0;
+	i = 2;
+	while (i * i <= n)
+	{
+		if (n % i == 0)
+			return 0;
+		i++;
+	}
+	return (1);
 }
 
 int	main(int argc, char **argv)
