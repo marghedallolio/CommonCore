@@ -31,7 +31,7 @@ int	render_frame(t_data *data)
 		else if (!ft_strcmp(data->fractal, "julia"))
 			draw_julia(data);
 		mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-		data->needs_redraw = 0;
+		data->needs_redraw = 1;
 	}
 	return (0);
 }
