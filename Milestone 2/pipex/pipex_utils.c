@@ -62,10 +62,8 @@ int	confronta(char *s1, char *s2, int start, int end)
 }
 
 /*gestisce l'input in base ai parametri della riga di comando (av)
-se il primo argomento e' here_doc, attiva una modalita' di input interattiva
-in caso contrario apre il file di input e redirige l'input standard sul file 
-restituisce il file descriptor per il file di input o 
-0 per il caso di here_doc*/
+apre il file di input e redirige l'input standard sul file 
+restituisce il file descriptor per il file di input*/
 int	check_input(char **av)
 {
 	int	fd_in;
@@ -78,8 +76,7 @@ int	check_input(char **av)
 }
 
 /* gestisce l'output in base ai parametri della riga di comando (av, ac)
-se il primo argomento e' here_doc apre il file di output in append
-altrimenti apre il file di output in mod truncate 
+apre il file di output in mod truncate 
 restituisce il file descriptor per il file di output*/
 int	check_output(char **av, int ac)
 {
@@ -88,6 +85,5 @@ int	check_output(char **av, int ac)
 	fd_out = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (fd_out == -1)
 		return (ft_printf("Error, failed to open input file\n"), -1);
-	return (fd_out);
 	return (fd_out);
 }

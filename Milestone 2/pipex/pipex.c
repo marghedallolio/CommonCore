@@ -96,8 +96,7 @@ int	cicle(char *cmd, char **env)
 }
 
 /*valida  gli argomenti e inizializza i descrittori di file
-processa i comandi e gestisce la pipeline in un ciclo 
-include una gestione speciale per il comando here_doc*/
+processa i comandi e gestisce la pipeline in un ciclo */
 int	main(int ac, char **av, char **env)
 {
 	int		i;

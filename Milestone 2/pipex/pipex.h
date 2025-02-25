@@ -23,7 +23,7 @@
 char	**ft_split_add(char *str, char *add, char c);
 char	*dupstr(char *str, int start);
 int		confronta(char *s1, char *s2, int start, int end);
-int		ft_slen(char *str);
+int		ft_strlen(const char *s);
 int		check_output(char **av, int ac);
 int		check_input(char **av);
 
