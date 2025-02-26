@@ -75,6 +75,7 @@ void	start_fractol(char *fractal)
 	mlx_loop_hook(data.mlx, render_frame, &data);
 	mlx_key_hook(data.win, handle_keys, &data);
 	mlx_mouse_hook(data.win, handle_mouse, &data);
+	mlx_hook(data.win, 17, 0, (int (*)(void *))exit, NULL);
 	mlx_loop(data.mlx);
 }
 
