@@ -25,12 +25,12 @@ void	ft_putchar_fd(char c, int fd)
 	write(fd, &c, 1);
 }
 
-static void	ft_smallputnbr(int n)
+static void	ft_putnbr(int n)
 {
 	if (n > 9)
 	{
-		ft_smallputnbr(n / 10);
-		ft_smallputnbr(n % 10);
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
 	}
 	else
 		ft_putchar_fd((n + '0'), STDOUT_FILENO);
@@ -39,7 +39,7 @@ static void	ft_smallputnbr(int n)
 int	main(int argc, char **argv)
 {
 	(void)argv;
-	
+	ft_putnbr(argc - 1);
 	write(1, "\n", 1);
 	return (0);
 }
