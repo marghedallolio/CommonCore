@@ -33,7 +33,7 @@ char	*create_path(char *command, char **env)
 	char	**com;
 
 	i = 0;
-	while (confronta(env[i], "PATH=", 0, 5) == 0) // trova la variabile PATH in env
+	while (compare_substring(env[i], "PATH=", 0, 5) == 0) // trova la variabile PATH in env
 		i++;
 	path = dupstr(env[i], 5);   // estrae i percorsi della variabile PATH
 	com = ft_split_add(command, NULL, ' ');    // divide il comando in argomenti
@@ -52,13 +52,14 @@ char	*create_path(char *command, char **env)
 
 /*esegue un comando utilizzando execeve
 si occupa della gestione della memoria liberando gli array allocati*/
-void	process(char *command, char **env)
+void	execute_command(char *command, char **env)
 {
 	char	**arg;
 	char	*path;
 
 	path = create_path(command, env);        // ottiene il percorso eseguibile
 	arg = ft_split_add(command, NULL, ' ');  // divide il comando in argomenti
+	// la funzione exceve sostituisce il processo figlio con un nuovo programma, eseguendolo con i parametri specificati
 	if (execve(path, arg, env) == -1)   // se exceve fallisce stampa un errore, libera la memoria allocata ed esce
 	{
 		free(path);
@@ -72,7 +73,7 @@ void	process(char *command, char **env)
 
 /*crea una pipe, genera un processo figlio (fork) e gestisce la redirezione di 
 input/output utilizzando dup2*/
-int	cicle(char *cmd, char **env)
+int	fork_and_pipe(char *cmd, char **env)
 {
 	pid_t	pid;
 	int		pip[2];
@@ -84,7 +85,7 @@ int	cicle(char *cmd, char **env)
 		close(pip[0]);  // chiude pip[0] (non legge)
 		if (dup2(pip[1], STDOUT_FILENO) == -1)   // reindirizza stdout alla pipe
 			return (ft_printf("Error, bad dup\n"), 0);
-		process(cmd, env);   // esegue cmd
+		execute_command(cmd, env);   // esegue cmd
 	}
 	else
 	{
@@ -111,10 +112,10 @@ int	main(int ac, char **av, char **env)
 		return (ft_printf("Error, file not opened\n"), 127);
 	i = 1;
 	while (++i < ac - 2)
-		if (cicle(av[i], env) == 0)
+		if (fork_and_pipe(av[i], env) == 0)
 			return (ft_printf("Error, bad input dup\n"), 127);
 	if (dup2(fd_out, 1) == -1)
 		return (ft_printf("Error, bad output dup\n"), 127);
-	process(av[i], env);
+	execute_command(av[i], env);
 	return (0);
 }

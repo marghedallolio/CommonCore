@@ -32,7 +32,7 @@ char	*dupstr(char *str, int start)
 1 se le stringhe coincidono nell'intervallo 
 0 in caso siano diverse 
 -1 per intervalli non validi*/
-int	confronta(char *s1, char *s2, int start, int end)
+int	compare_substring(char *s1, char *s2, int start, int end)
 {
 	int	i;
 

@@ -22,9 +22,13 @@
 
 char	**ft_split_add(char *str, char *add, char c);
 char	*dupstr(char *str, int start);
-int		confronta(char *s1, char *s2, int start, int end);
+char	*create_path(char *command, char **env);
+int		compare_substring(char *s1, char *s2, int start, int end);
 int		ft_strlen(const char *s);
 int		check_output(char **av, int ac);
 int		check_input(char **av);
+int		fork_and_pipe(char *cmd, char **env);
+void	free_arr(char **arr);
+void	execute_command(char *command, char **env);
 
 #endif
