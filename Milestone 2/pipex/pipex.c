@@ -33,18 +33,18 @@ char	*create_path(char *command, char **env)
 	char	**com;
 
 	i = 0;
-	while (compare_substring(env[i], "PATH=", 0, 5) == 0) // trova la variabile PATH in env
+	while (compare_substring(env[i], "PATH=", 0, 5) == 0)
 		i++;
-	path = dupstr(env[i], 5);   // estrae i percorsi della variabile PATH
-	com = ft_split_add(command, NULL, ' ');    // divide il comando in argomenti
-	search = ft_split_add(path, com[0], ':');  // genera i percorsi possibili
+	path = dupstr(env[i], 5);
+	com = ft_split_add(command, NULL, ' ');
+	search = ft_split_add(path, com[0], ':');
 	i = -1;
 	while (search[++i] != NULL)
 	{
-		if (access(search[i], X_OK) == 0)   // controlla se il file e' eseguibile in X_OK
+		if (access(search[i], X_OK) == 0)
 		{
 			path = dupstr(search[i], 0);
-			return (free_arr(com), free_arr(search), path);  // restituisce il percorso completo
+			return (free_arr(com), free_arr(search), path);
 		}
 	}
 	return (NULL);
@@ -57,10 +57,11 @@ void	execute_command(char *command, char **env)
 	char	**arg;
 	char	*path;
 
-	path = create_path(command, env);        // ottiene il percorso eseguibile
-	arg = ft_split_add(command, NULL, ' ');  // divide il comando in argomenti
-	// la funzione exceve sostituisce il processo figlio con un nuovo programma, eseguendolo con i parametri specificati
-	if (execve(path, arg, env) == -1)   // se exceve fallisce stampa un errore, libera la memoria allocata ed esce
+	path = create_path(command, env);
+	if (!path)
+		path = command;
+	arg = ft_split_add(command, NULL, ' ');
+	if (execve(path, arg, env) == -1)
 	{
 		free(path);
 		free_arr(arg);
@@ -78,19 +79,19 @@ int	fork_and_pipe(char *cmd, char **env)
 	pid_t	pid;
 	int		pip[2];
 
-	pipe(pip);     // crea una pipe
-	pid = fork();  // genera un processo figlio (il padre e il figlio continuano ad eseguire il codice)
-	if (pid == 0)  // caso figlio 
+	pipe(pip);
+	pid = fork();
+	if (pid == 0)
 	{
-		close(pip[0]);  // chiude pip[0] (non legge)
-		if (dup2(pip[1], STDOUT_FILENO) == -1)   // reindirizza stdout alla pipe
+		close(pip[0]);
+		if (dup2(pip[1], STDOUT_FILENO) == -1)
 			return (ft_printf("Error, bad dup\n"), 0);
-		execute_command(cmd, env);   // esegue cmd
+		execute_command(cmd, env);
 	}
 	else
 	{
-		close(pip[1]);  //chiude pip[1] (non scrive)
-		if (dup2(pip[0], STDIN_FILENO) == -1)  // reindirizza stdin alla pipe
+		close(pip[1]);
+		if (dup2(pip[0], STDIN_FILENO) == -1)
 			return (ft_printf("Error, bad dup\n"), 0);
 	}
 	return (1);

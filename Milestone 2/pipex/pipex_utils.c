@@ -30,7 +30,7 @@ char	*dupstr(char *str, int start)
 
 /*confronta due stringhe in base a un intervallo (start fino a end)
 1 se le stringhe coincidono nell'intervallo 
-0 in caso siano diverse 
+0 in caso contrario 
 -1 per intervalli non validi*/
 int	compare_substring(char *s1, char *s2, int start, int end)
 {
