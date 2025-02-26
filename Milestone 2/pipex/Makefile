@@ -21,10 +21,10 @@ DIR_LIBFT = libft_printf/
 CC = cc
 
 #flags di compilazione
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 
 #lista dei file sorgente
-SRC = 	pipex.c pipex_utils.c ft_split_add.c 
+SRC = 	pipex.c pipex_utils.c ft_split_add.c
 
 #genera il nome dei file oggetto (.o) a partire ai file sorgente (.c)
 OBJ = $(SRC:.c=.o)

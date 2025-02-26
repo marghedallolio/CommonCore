@@ -85,5 +85,6 @@ int	check_output(char **av, int ac)
 	fd_out = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (fd_out == -1)
 		return (ft_printf("Error, failed to open input file\n"), -1);
+	close(fd_out);
 	return (fd_out);
 }

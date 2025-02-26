@@ -27,8 +27,12 @@ int		compare_substring(char *s1, char *s2, int start, int end);
 int		ft_strlen(const char *s);
 int		check_output(char **av, int ac);
 int		check_input(char **av);
-int		fork_and_pipe(char *cmd, char **env);
+void	fork_and_pipe(char *cmd1, char *cmd2, char **env, int fd_in, int fd_out);
 void	free_arr(char **arr);
 void	execute_command(char *command, char **env);
+char    *get_path(char *cmd, char **envp);
+char    **get_paths(char **envp);
+char    **split_paths(char *path);
+char    *find_path_variable(char **envp);
 
 #endif
