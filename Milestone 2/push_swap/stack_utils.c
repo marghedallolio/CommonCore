@@ -30,6 +30,8 @@ void push(t_stack *stack, int value)
 {
     t_node *new_node;
 
+	if (!stack)
+		return ;
     new_node = (t_node *)malloc(sizeof(t_node));
     if (!new_node)
         return;
@@ -45,8 +47,8 @@ int pop(t_stack *stack)
     int value;
     t_node *temp;
 
-    if (stack->size == 0)
-        return (0);
+    if (!stack || stack->size == 0)
+        return (INT_MIN);
     temp = stack->top;
     value = temp->value;
     stack->top = temp->next;
@@ -60,6 +62,8 @@ void free_stack(t_stack *stack)
 {
     t_node *temp;
 
+	if (!stack)
+		return ;
     while (stack->top)
     {
         temp = stack->top;

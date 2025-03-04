@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <limits.h>
 
-int is_number(char *str)
+static int is_number(char *str)
 {
     int i = 0;
     if (str[i] == '-' || str[i] == '+')
@@ -27,7 +26,7 @@ int is_number(char *str)
     return (1);
 }
 
-int is_duplicate(t_stack *stack, int num)
+static int is_duplicate(t_stack *stack, int num)
 {
     t_node *current = stack->top;
     while (current)
@@ -42,19 +41,23 @@ int is_duplicate(t_stack *stack, int num)
 void parse_input(t_stack *a, char **argv)
 {
     int num;
-    for (int i = 1; argv[i]; i++)
+	int	i;
+
+	i = 1;
+    while (argv[i])
     {
         if (!is_number(argv[i]))
         {
-            write(2, "Error\n", 6);
+            ft_printf("Error\n", 0);
             exit(EXIT_FAILURE);
         }
-        num = atoi(argv[i]);
+        num = ft_atoi(argv[i]);
         if (num < INT_MIN || num > INT_MAX || is_duplicate(a, num))
         {
-            write(2, "Error\n", 6);
+            ft_printf("Error\n", 0);
             exit(EXIT_FAILURE);
         }
-        push(a, num);
+        push_to(a, num);
+		i++;
     }
 }

@@ -13,7 +13,9 @@
 ./SILENT:
 
 # nome della libreria
-NAME = push_swap 
+NAME = push_swap
+LIBFT = libft_printf/libft_printf.a
+DIR_LIBFT = libft_printf/
 
 # compilatore e flags di compilazione 
 CC = cc
@@ -28,20 +30,27 @@ OBJ = $(SRC:.c=.o)
 # regola principale per creare l'eseguibile
 all: $(NAME)
 
+$(LIBFT):
+	make -C $(DIR_LIBFT)
+
 # creazione libreria
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	make clean
+	make -C $(DIR_LIBFT) fclean
 
 # compilazione dei file oggetto
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # pulizia dei file oggetto 
-clean: 
-	rm -f $(OBJ)
+clean:
+	make -C $(DIR_LIBFT) clean
+	rm -rf $(OBJ)
 
 # rimozione dei file oggetto e libreria
 fclean: clean
+	make -C $(DIR_LIBFT) fclean
 	rm -f $(NAME)
 	
 # ricompilazione completa

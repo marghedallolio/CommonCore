@@ -15,51 +15,61 @@
 // swap (sa, sb, ss)
 void swap(t_stack *stack)
 {
-    if (stack->size < 2)
-        return;
-    t_node *first = stack->top;
-    t_node *second = first->next;
-    first->next = second->next;
-    second->next = first;
-    stack->top = second;
+	t_node	*first;
+	t_node	*second;
+
+	if (!stack || stack->size < 2)
+		return;
+	first = stack->top;
+	second = first->next;
+	first->next = second->next;
+	second->next = first;
+	stack->top = second;
 }
 
 // push (pa, pb)
 void push_to(t_stack *src, t_stack *dest)
 {
-    if (src->size == 0)
-        return;
-    int value = pop(src);
-    push(dest, value);
+	int	value;
+	if (!src || src->size == 0)
+		return;
+	value = pop(src);
+	push(dest, value);
 }
 
 // rotate (ra, rb, rr)
 void rotate(t_stack *stack)
 {
-    if (stack->size < 2)
-        return;
-    t_node *first = stack->top;
-    t_node *last = first;
-    while (last->next)
-        last = last->next;
-    stack->top = first->next;
-    first->next = NULL;
-    last->next = first;
+	t_node	*first;
+	t_node	*last;
+
+	if (!stack || stack->size < 2)
+		return;
+	first = stack->top;
+	stack->top = first->next;
+	last = first;
+	while (last->next)
+		last = last->next;
+	first->next = NULL;
+	last->next = first;
 }
 
 // reverse rotate (rra, rrb, rrr)
 void reverse_rotate(t_stack *stack)
 {
-    if (stack->size < 2)
-        return;
-    t_node *prev = NULL;
-    t_node *current = stack->top;
-    while (current->next)
-    {
-        prev = current;
-        current = current->next;
-    }
-    prev->next = NULL;
-    current->next = stack->top;
-    stack->top = current;
+	t_node	*prev;
+	t_node	*current;
+
+	if (!stack || stack->size < 2)
+		return;
+	prev = NULL;
+	current = stack->top;
+	while (current->next)
+	{
+		prev = current;
+		current = current->next;
+	}
+	prev->next = NULL;
+	current->next = stack->top;
+	stack->top = current;
 }

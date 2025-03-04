@@ -15,6 +15,12 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
+# include <limits.h>
+# include "libft_printf.h"
+
+#define INT_MIN -2147483648
+#define INT_MAX 2147483647
 
 typedef struct s_node
 {
@@ -28,10 +34,16 @@ typedef struct s_stack
     int     size;
 } t_stack;
 
-// Funzioni per la gestione dello stack
+
 t_stack *init_stack(void);
-void    push(t_stack *stack, int value);
-int     pop(t_stack *stack);
-void    free_stack(t_stack *stack);
+void	push(t_stack *stack, int value);
+void	free_stack(t_stack *stack);
+void	swap(t_stack *stack);
+void	push_to(t_stack *src, t_stack *dest);
+void	rotate(t_stack *stack);
+void	reverse_rotate(t_stack *stack);
+void	parse_input(t_stack *a, char **argv);
+void	radix_sort(t_stack *a, t_stack *b);
+int		pop(t_stack *stack);
 
 #endif
