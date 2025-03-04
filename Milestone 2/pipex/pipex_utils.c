@@ -12,6 +12,14 @@
 
 #include "pipex.h"
 
+void	close_all(t_pipex pipex)
+{
+	close(pipex.fd_in);
+	close(pipex.fd_in);
+	close(pipex.pip[0]);
+	close(pipex.pip[1]);
+}
+
 /*duplica una stringa a partire da start*/
 char	*dupstr(char *str, int start)
 {

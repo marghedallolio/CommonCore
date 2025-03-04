@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-int	count(char *str, int which, int where, char c)
+static int	count(char *str, int which, int where, char c)
 {
 	int	i;
 	int	line;
@@ -32,7 +32,7 @@ int	count(char *str, int which, int where, char c)
 	return (i);
 }
 
-void	copy(char *str, char **arr, char c)
+static void	copy(char *str, char **arr, char c)
 {
 	int	i;
 	int	j;
@@ -57,7 +57,7 @@ void	copy(char *str, char **arr, char c)
 	arr[++y] = NULL;
 }
 
-char	*ft_strjoin2(char *s1, char *s2)
+static char	*ft_strjoin2(char *s1, char *s2)
 {
 	int		len_s1;
 	int		len_s2;

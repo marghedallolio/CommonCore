@@ -24,7 +24,7 @@ CC = cc
 CFLAGS = #-Wall -Wextra -Werror
 
 #lista dei file sorgente
-SRC = 	pipex.c pipex_utils.c ft_split_add.c
+SRC = 	pipex.c pipex_utils.c ft_split_add.c fork_pipe.c
 
 #genera il nome dei file oggetto (.o) a partire ai file sorgente (.c)
 OBJ = $(SRC:.c=.o)
