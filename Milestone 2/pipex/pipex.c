@@ -26,7 +26,7 @@ void	free_arr(char **arr)
 /*cerca il percorso completo di un comando analizzando la variabile d'ambiente 
 PATH, divide il contenuto di path in directory, aggiunge il comando e 
 controlla se ogni percorso e' eseguibile (access con X_OK)*/
-char	**get_search_paths(char *command, char **env)
+char	*create_path(char *command, char **env)
 {
 	int		i;
 	char	*path;
@@ -41,30 +41,16 @@ char	**get_search_paths(char *command, char **env)
 	path = dupstr(env[i], 5);
 	com = ft_split_add(command, NULL, ' ');
 	search = ft_split_add(path, com[0], ':');
-	free_arr(com);
-	free(path);
-	return (search);
-}
-
-char	*create_path(char *command, char **env)
-{
-	int		i;
-	char	*path;
-	char	**search;
-
-	search = get_search_paths(command, env);
-	if (!search)
-		return (NULL);
 	i = -1;
 	while (search[++i] != NULL)
 	{
 		if (access(search[i], X_OK) == 0)
 		{
 			path = dupstr(search[i], 0);
-			free_arr(search);
-			return (path);
+			return (free_arr(com), free_arr(search), path);
 		}
 	}
+	free_arr(com);
 	free_arr(search);
 	return (NULL);
 }
@@ -100,21 +86,19 @@ void	execute_command(char *command, char **env)
 
 int	main(int ac, char **av, char **env)
 {
-	int		fd_out;
-	int		fd_in;
 	t_pipex	pipex;
 
 	if (ac != 5)
 		return (ft_printf("Error, too few arguments\n"), 127);
-	fd_in = open(av[1], O_RDONLY);
-	if (fd_in < 0)
+	pipex.fd_in = open(av[1], O_RDONLY);
+	if (pipex.fd_in < 0)
 		return (ft_printf("Input file open error\n"), 127);
-	fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (fd_out < 0)
+	pipex.fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (pipex.fd_out < 0)
 		return (ft_printf("Output file open error\n"), 127);
 	pipex.cmd1 = av[2];
 	pipex.cmd2 = av[3];
-	fork_and_pipe(pipex);
-	close(fd_in);
-	close(fd_out);
+	fork_and_pipe(&pipex, env);
+	close(pipex.fd_in);
+	close(pipex.fd_out);
 }
