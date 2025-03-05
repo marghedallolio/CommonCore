@@ -40,20 +40,6 @@ int ft_strlen(char *str)
     return (i);
 }
 
-char *ft_strdup(char *str)
-{
-    char *new;
-    int i = 0;
-    new = malloc(ft_strlen(str) + 1);
-    while (str[i])
-    {
-        new[i] = str[i];
-        i++;
-    }
-    new[i] = '\0';
-    return (new);
-}
-
 int main(int argc, char **argv)
 {
     if (argc == 2)

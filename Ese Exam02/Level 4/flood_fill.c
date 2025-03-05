@@ -136,8 +136,12 @@ char	**make_area(char** zone, t_point size)
 
 void free_area(char **area, t_point size)
 {
-	for (int i = 0; i < size.y; ++i)
+	int i = 0; 
+	while (i < size.y)
+	{
 		free(area[i]);
+		i++;
+	}
 	free(area);
 }
 
