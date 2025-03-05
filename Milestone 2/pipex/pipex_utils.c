@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 
 #include "pipex.h"
-
+/*chiude tutto*/
 void	close_all(t_pipex pipex)
 {
 	close(pipex.fd_in);
-	close(pipex.fd_in);
+	close(pipex.fd_out);
 	close(pipex.pip[0]);
 	close(pipex.pip[1]);
 }
@@ -67,32 +67,4 @@ int	compare_substring(char *s1, char *s2, int start, int end)
 		}
 	}
 	return (1);
-}
-
-/*gestisce l'input in base ai parametri della riga di comando (av)
-apre il file di input e redirige l'input standard sul file 
-restituisce il file descriptor per il file di input*/
-int	check_input(char **av)
-{
-	int	fd_in;
-
-	fd_in = open(av[1], O_RDWR);
-	if (dup2(fd_in, 0) == -1)
-		return (ft_printf("Error, bad input dup\n"), 0);
-	close(fd_in);
-	return (fd_in);
-}
-
-/* gestisce l'output in base ai parametri della riga di comando (av, ac)
-apre il file di output in mod truncate 
-restituisce il file descriptor per il file di output*/
-int	check_output(char **av, int ac)
-{
-	int	fd_out;
-
-	fd_out = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0777);
-	if (fd_out == -1)
-		return (ft_printf("Error, failed to open input file\n"), -1);
-	close(fd_out);
-	return (fd_out);
 }

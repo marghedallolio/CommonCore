@@ -36,8 +36,6 @@ char	*create_path(char *command, char **env);
 char	**get_search_paths(char *command, char **env);
 int		compare_substring(char *s1, char *s2, int start, int end);
 int		ft_strlen(const char *s);
-int		check_output(char **av, int ac);
-int		check_input(char **av);
 void	fork_and_pipe(t_pipex pipex);
 void	close_all(t_pipex pipex);
 void	free_arr(char **arr);

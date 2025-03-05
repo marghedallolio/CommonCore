@@ -15,9 +15,15 @@
 static void	child_process1(t_pipex pipex)
 {
 	if (dup2(pipex.fd_in, STDIN_FILENO) == -1)
-		exit(ft_printf("Error, bad dup\n"));
+	{
+		perror("dup2 failed");
+		exit(1);
+	}
 	if (dup2(pipex.pip[1], STDOUT_FILENO) == -1)
-		exit(ft_printf("Error, bad dup\n"));
+	{
+		perror("dup2 failed");
+		exit(1);
+	}
 	close_all(pipex);
 	execute_command(pipex.cmd1, pipex.env);
 }
@@ -25,9 +31,15 @@ static void	child_process1(t_pipex pipex)
 static void	child_process2(t_pipex pipex)
 {
 	if (dup2(pipex.fd_out, STDOUT_FILENO) == -1)
-		exit(ft_printf("Error, bad dup\n"));
+	{
+		perror("dup2 failed");
+		exit(1);
+	}
 	if (dup2(pipex.pip[0], STDIN_FILENO) == -1)
-		exit(ft_printf("Error, bad dup\n"));
+	{
+		perror("dup2 failed");
+		exit(1);
+	}
 	close_all(pipex);
 	execute_command(pipex.cmd2, pipex.env);
 }
@@ -38,7 +50,10 @@ void	fork_and_pipe(t_pipex pipex)
 	pid_t	pid2;
 
 	if (pipe(pipex.pip) == -1)
-		exit(ft_printf("Pipe error"));
+	{
+		perror("Pipe error");
+		exit(EXIT_FAILURE);
+	}
 	pid = fork();
 	if (pid == 0)
 		child_process1(pipex);
