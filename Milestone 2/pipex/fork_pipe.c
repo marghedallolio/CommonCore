@@ -19,7 +19,7 @@ static void	child_process1(t_pipex pipex, char **env)
 	if (dup2(pipex.pip[1], STDOUT_FILENO) == -1)
 		exit(ft_printf("Error,2 bad dup\n"));
 	close_all(pipex);
-	execute_command(pipex.cmd1, env);
+	execute_command(pipex.cmd1, env, pipex);
 }
 
 static void	child_process2(t_pipex pipex, char **env)
@@ -29,7 +29,7 @@ static void	child_process2(t_pipex pipex, char **env)
 	if (dup2(pipex.pip[0], STDIN_FILENO) == -1)
 		exit(ft_printf("Error,4 bad dup\n"));
 	close_all(pipex);
-	execute_command(pipex.cmd2, env);
+	execute_command(pipex.cmd2, env, pipex);
 }
 
 void	fork_and_pipe(t_pipex *pipex, char **env)
@@ -47,12 +47,12 @@ void	fork_and_pipe(t_pipex *pipex, char **env)
 		child_process1(*pipex, env);
 	else
 	{
+		waitpid(pid, NULL, 0);
+		close(pipex->pip[1]);
 		pid2 = fork();
 		if (pid2 == 0)
 			child_process2(*pipex, env);
-		close(pipex->pip[0]);
-		close(pipex->pip[1]);
-		waitpid(pid, NULL, 0);
 		waitpid(pid2, NULL, 0);
+		close(pipex->pip[0]);
 	}
 }

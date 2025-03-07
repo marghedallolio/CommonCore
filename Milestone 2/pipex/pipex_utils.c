@@ -11,14 +11,6 @@
 /* ************************************************************************** */
 
 #include "pipex.h"
-/*chiude tutto*/
-void	close_all(t_pipex pipex)
-{
-	close(pipex.fd_in);
-	close(pipex.fd_out);
-	close(pipex.pip[0]);
-	close(pipex.pip[1]);
-}
 
 /*duplica una stringa a partire da start*/
 char	*dupstr(char *str, int start)
@@ -29,6 +21,8 @@ char	*dupstr(char *str, int start)
 	if (start >= ft_strlen(str))
 		return (NULL);
 	app = malloc(ft_strlen(str) + 1 - start);
+	if (!app)
+		return (NULL);
 	i = -1;
 	while (str[start])
 		app[++i] = str[start++];

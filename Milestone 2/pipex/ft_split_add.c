@@ -79,7 +79,7 @@ static char	*ft_strjoin2(char *s1, char *s2)
 	return (str);
 }
 
-char	**ft_split_add(char *str, char *add, char c)
+char	**ft_split_add(char *str, char *add, char c, int flag)
 {
 	char	**arr;
 	char	*temp;
@@ -91,6 +91,8 @@ char	**ft_split_add(char *str, char *add, char c)
 		return (NULL);
 	i = count(str, 0, 0, c);
 	arr = malloc((i + 1) * sizeof(char *));
+	if (!arr)
+		return (NULL);
 	copy(str, arr, c);
 	while (--i >= 0 && add != NULL)
 	{
@@ -98,5 +100,7 @@ char	**ft_split_add(char *str, char *add, char c)
 		free(arr[i]);
 		arr[i] = temp;
 	}
+	if (flag)
+		free(str);
 	return (arr);
 }

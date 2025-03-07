@@ -21,10 +21,10 @@ DIR_LIBFT = libft_printf/
 CC = cc
 
 #flags di compilazione
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 #lista dei file sorgente
-SRC = 	pipex.c pipex_utils.c ft_split_add.c fork_pipe.c
+SRC = 	pipex.c pipex_utils.c ft_split_add.c fork_pipe.c free_and_close.c
 
 #genera il nome dei file oggetto (.o) a partire ai file sorgente (.c)
 OBJ = $(SRC:.c=.o)
@@ -40,8 +40,8 @@ $(LIBFT):
 #creazione libreria
 $(NAME):	$(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) 
-	make clean
-	make -C $(DIR_LIBFT) fclean
+#	make clean
+#	make -C $(DIR_LIBFT) fclean
 
 #compilazione dei file sorgente
 %.o: %.c
