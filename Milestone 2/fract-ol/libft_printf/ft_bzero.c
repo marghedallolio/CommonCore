@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putunsigned.c                                   :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdalloli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 14:56:18 by mdalloli          #+#    #+#             */
-/*   Updated: 2024/11/29 14:56:20 by mdalloli         ###   ########.fr       */
+/*   Created: 2024/11/18 17:47:24 by mdalloli          #+#    #+#             */
+/*   Updated: 2024/11/18 17:47:28 by mdalloli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft_printf.h"
 
-int	ft_putunsigned(unsigned int n)
+void	ft_bzero(void *s, size_t n)
 {
-	int		len;
-	char	c;
-
-	len = 0;
-	if (n >= 10)
-		len += ft_putunsigned(n / 10);
-	c = (n % 10) + '0';
-	len += ft_putchar(c);
-	return (len);
+	ft_memset(s, '\0', n);
 }

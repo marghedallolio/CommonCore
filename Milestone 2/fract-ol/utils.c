@@ -26,12 +26,12 @@ int	render_frame(t_data *data)
 {
 	if (data->needs_redraw)
 	{
-		if (!ft_strcmp(data->fractal, "mandelbrot"))
+		if (data->fractal && !ft_strcmp(data->fractal, "mandelbrot"))
 			draw_mandelbrot(data);
-		else if (!ft_strcmp(data->fractal, "julia"))
+		else if (data->fractal && !ft_strcmp(data->fractal, "julia"))
 			draw_julia(data);
 		mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-		data->needs_redraw = 1;
+		data->needs_redraw = 0;
 	}
 	return (0);
 }
@@ -39,10 +39,32 @@ int	render_frame(t_data *data)
 void	cleanup(t_data *data)
 {
 	if (data->img)
+	{
 		mlx_destroy_image(data->mlx, data->img);
+		data->img = NULL;
+	}
 	if (data->win)
+	{
 		mlx_destroy_window(data->mlx, data->win);
+		data->win = NULL;
+	}
 	if (data->mlx)
+	{
+		mlx_destroy_display(data->mlx);
 		free(data->mlx);
+		data->mlx = NULL;
+	}
+}
+
+int	clean_exit(t_data *data)
+{
+	cleanup(data);
 	exit(0);
+	return (0);
+}
+
+void	exit_with_error(char *msg)
+{
+	ft_printf("%s\n", msg);
+	exit(1);
 }

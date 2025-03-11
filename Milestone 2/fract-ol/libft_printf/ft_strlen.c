@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdalloli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 11:14:20 by mdalloli          #+#    #+#             */
-/*   Updated: 2025/02/12 11:14:29 by mdalloli         ###   ########.fr       */
+/*   Created: 2024/11/18 14:46:59 by mdalloli          #+#    #+#             */
+/*   Updated: 2024/11/18 14:47:01 by mdalloli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "libft_printf.h"
 
-void	put_pixel(t_data *data, int x, int y, int color)
+int	ft_strlen(const char *s)
 {
-	char	*pxl;
+	size_t	i;
 
-	if (!data->addr)
-		return ;
-	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
+	i = 0;
+	while (s[i] != '\0')
 	{
-		pxl = data->addr + (y * data->line_len + x * (data->bpp / 8));
-		*(unsigned int *)pxl = color;
+		i++;
 	}
+	return (i);
 }
-
-int	get_color(int iter)
+/*
+int	main(void)
 {
-	if (iter < 50)
-		return (COLOR_1);
-	else if (iter < 100)
-		return (COLOR_2);
-	else
-		return (COLOR_3);
-}
+	char	*s1 = "ciao";
+	char	*s2 = "42";
+	char	*s3 = "stringa lunga";
+	printf("Stringa: \"%s\" -> Lunghezza: %zu\n", s1, ft_strlen(s1));
+	printf("Stringa: \"%s\" -> Lunghezza: %zu\n", s2, ft_strlen(s2));
+	printf("Stringa: \"%s\" -> Lunghezza: %zu\n", s3, ft_strlen(s3));
+	return (0);
+}*/

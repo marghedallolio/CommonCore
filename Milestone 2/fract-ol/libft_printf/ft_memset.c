@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdalloli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 11:14:20 by mdalloli          #+#    #+#             */
-/*   Updated: 2025/02/12 11:14:29 by mdalloli         ###   ########.fr       */
+/*   Created: 2024/11/18 17:32:28 by mdalloli          #+#    #+#             */
+/*   Updated: 2024/11/18 17:32:32 by mdalloli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "libft_printf.h"
 
-void	put_pixel(t_data *data, int x, int y, int color)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	char	*pxl;
+	unsigned char	*p;
+	unsigned char	value;
+	size_t			i;
 
-	if (!data->addr)
-		return ;
-	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
+	i = 0;
+	p = (unsigned char *)s;
+	value = (unsigned char) c;
+	while (i < n)
 	{
-		pxl = data->addr + (y * data->line_len + x * (data->bpp / 8));
-		*(unsigned int *)pxl = color;
+		p[i] = value;
+		i++;
 	}
+	return (s);
 }
-
-int	get_color(int iter)
+/*
+int	main(void)
 {
-	if (iter < 50)
-		return (COLOR_1);
-	else if (iter < 100)
-		return (COLOR_2);
-	else
-		return (COLOR_3);
-}
+	char	buff[20] = "basta ciao";
+	printf("buffer originale: %s\n", buff);
+	ft_memset(buff, '*', 5);
+	printf("buffer dopo: %s\n", buff);
+	return (0);
+}*/

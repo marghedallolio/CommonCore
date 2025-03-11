@@ -1,36 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdalloli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 11:14:20 by mdalloli          #+#    #+#             */
-/*   Updated: 2025/02/12 11:14:29 by mdalloli         ###   ########.fr       */
+/*   Created: 2024/11/18 14:32:22 by mdalloli          #+#    #+#             */
+/*   Updated: 2024/11/18 14:32:25 by mdalloli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "libft_printf.h"
 
-void	put_pixel(t_data *data, int x, int y, int color)
+int	ft_isascii(int c)
 {
-	char	*pxl;
+	int	r;
 
-	if (!data->addr)
-		return ;
-	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
+	r = 0;
+	if (c >= 0 && c <= 127)
 	{
-		pxl = data->addr + (y * data->line_len + x * (data->bpp / 8));
-		*(unsigned int *)pxl = color;
+		r = 1;
 	}
+	return (r);
 }
-
-int	get_color(int iter)
+/*
+int	main(void)
 {
-	if (iter < 50)
-		return (COLOR_1);
-	else if (iter < 100)
-		return (COLOR_2);
-	else
-		return (COLOR_3);
-}
+	char test[] = {'A', 'z', '0', '9', '!'};
+	int	numtest = sizeof(test) / sizeof(test[0]);
+	int	i;
+	char	c;
+	
+	i = 0;
+	while (i < numtest)
+	{
+		char c = test[i];
+		printf("Test del carattere: '%c' (%d): %s\n",c ,c , 
+				ft_isascii(c) ? "ascii" : "Non ascii");
+		i++;
+	}
+	return (0);
+}*/

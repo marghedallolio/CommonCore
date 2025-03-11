@@ -15,7 +15,7 @@
 int	handle_keys(int key, t_data *data)
 {
 	if (key == 65307)
-		cleanup(data);
+		clean_exit(data);
 	return (0);
 }
 
@@ -27,7 +27,7 @@ int	handle_mouse(int button, int x, int y, t_data *data)
 
 	if (!data || !data->fractal)
 		return (0);
-	mouse_x = (x - WIDTH / 2.0) * 4.0 / WIDTH * data->zoom + data->move_x; // invertire width con height per mouse classico
+	mouse_x = (x - WIDTH / 2.0) * 4.0 / WIDTH * data->zoom + data->move_x;
 	mouse_y = (y - HEIGHT / 2.0) * 4.0 / HEIGHT * data->zoom + data->move_y;
 	if (button == 4)
 		zoom_factor = 1.1;

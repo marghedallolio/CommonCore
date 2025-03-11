@@ -12,12 +12,12 @@
 
 #include "fractol.h"
 
-double	get_cx(int x, t_data *data)
+static double	get_cx(int x, t_data *data)
 {
 	return ((x - WIDTH / 2.0) * 4.0 / WIDTH * data->zoom + data->move_x);
 }
 
-double	get_cy(int y, t_data *data)
+static double	get_cy(int y, t_data *data)
 {
 	return ((y - HEIGHT / 2.0) * 4.0 / HEIGHT * data->zoom + data->move_y);
 }

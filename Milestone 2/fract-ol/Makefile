@@ -17,8 +17,8 @@ NAME = fractol
 
 MLX = mlx/libmlx.a
 DIR_MLX = mlx/
-FT_PRINTF = ft_printf/ft_printf.a
-DIR_FT_PRINTF = ft_printf/
+LIBFT = libft_printf/libft_printf.a
+DIR_LIBFT = libft_printf/
 
 #Compilatore e flags di compilazione
 CC = cc
@@ -26,7 +26,7 @@ CFLAGS = -Wall -Werror -Wextra
 MLXFLAGS = -Lmlx -lXext -lm -lmlx -lX11
 
 #File sorgenti
-SRC = main.c utils.c julia.c mandelbrot.c draw.c events.c
+SRC = main.c utils.c julia.c mandelbrot.c draw.c events.c fractol.c
 
 #genera il nome dei file oggetto (.o) a partire ai file sorgente (.c)
 OBJ = $(SRC:.c=.o)
@@ -38,13 +38,13 @@ all: $(NAME)
 $(MLX):
 	make -C $(DIR_MLX)
 
-# Creazione della libreria ft_printf
-$(FT_PRINTF):
-	make -C $(DIR_FT_PRINTF)
+# Creazione della libreria libft_printf
+$(LIBFT):
+	make -C $(DIR_LIBFT)
 
 #creazione libreria
-$(NAME): $(OBJ) $(MLX) $(FT_PRINTF)
-	$(CC) $(CFLAGS) $(OBJ) $(MLX) $(FT_PRINTF) -o $(NAME) $(MLXFLAGS)
+$(NAME): $(OBJ) $(MLX) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJ) $(MLX) $(LIBFT) -o $(NAME) $(MLXFLAGS)
 
 #compilazione dei file sorgente
 %.o: %.c
@@ -53,7 +53,7 @@ $(NAME): $(OBJ) $(MLX) $(FT_PRINTF)
 #pulizia dei file oggetto
 clean:
 	make -C $(DIR_MLX) clean
-	make -C $(DIR_FT_PRINTF) clean
+	make -C $(DIR_LIBFT) clean
 	rm -rf $(OBJ)
 
 #rimozione di file oggetto e libreria
