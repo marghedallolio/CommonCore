@@ -12,6 +12,51 @@
 
 #include "fractol.h"
 
+static double	handle_fraction(const char **str)
+{
+	double	fraction;
+	int		divisor;
+
+	fraction = 0.0;
+	divisor = 1;
+	(*str)++;
+	while (ft_isdigit(**str))
+	{
+		fraction = fraction * 10.0 + (**str - '0');
+		divisor *= 10;
+		(*str)++;
+	}
+	return (fraction / divisor);
+}
+
+/*converte una stringa in un numero double*/
+double	ft_strtod(const char *str, char **endptr)
+{
+	double	result;
+	int		sign;
+
+	result = 0.0;
+	sign = 1;
+	while (*str == ' ' || *str == '\t')
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-' )
+			sign = -1;
+		str++;
+	}
+	while (ft_isdigit(*str))
+	{
+		result = result * 10.0 + (*str - '0');
+		str++;
+	}
+	if (*str == '.')
+		result += handle_fraction(&str);
+	if (endptr)
+		*endptr = (char *)str;
+	return (result * sign);
+}
+
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
@@ -54,17 +99,4 @@ void	cleanup(t_data *data)
 		free(data->mlx);
 		data->mlx = NULL;
 	}
-}
-
-int	clean_exit(t_data *data)
-{
-	cleanup(data);
-	exit(0);
-	return (0);
-}
-
-void	exit_with_error(char *msg)
-{
-	ft_printf("%s\n", msg);
-	exit(1);
 }

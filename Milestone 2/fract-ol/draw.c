@@ -27,10 +27,5 @@ void	put_pixel(t_data *data, int x, int y, int color)
 
 int	get_color(int iter)
 {
-	if (iter < 50)
-		return (COLOR_1);
-	else if (iter < 100)
-		return (COLOR_2);
-	else
-		return (COLOR_3);
+	return (iter * 255 * 255 * 255 * 255 / 100);
 }

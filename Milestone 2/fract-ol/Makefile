@@ -22,7 +22,7 @@ DIR_LIBFT = libft_printf/
 
 #Compilatore e flags di compilazione
 CC = cc
-CFLAGS = -Wall -Werror -Wextra 
+CFLAGS = -Wall -Werror -Wextra -O3
 MLXFLAGS = -Lmlx -lXext -lm -lmlx -lX11
 
 #File sorgenti
