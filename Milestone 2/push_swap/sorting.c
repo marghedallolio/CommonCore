@@ -6,44 +6,62 @@
 /*   By: mdalloli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:16:59 by mdalloli          #+#    #+#             */
-/*   Updated: 2025/02/24 14:17:00 by mdalloli         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:36:18 by mdalloli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// Trova il numero massimo di bit necessari per il sorting
-static int get_max_bits(t_stack *stack)
+bool	stack_sorted(t_stack_node *stack)
 {
-    int max = stack->size - 1; // Poiché usiamo gli indici normalizzati
-    int bits = 0;
-
-    while (max > 0) {
-        max >>= 1;
-        bits++;
-    }
-    return bits;
+	if (!stack)
+		return (1);
+	while (stack->next)
+	{
+		if (stack->value > stack->next->value)
+			return (false);
+		stack = stack->next;
+	}
+	return (true);
 }
 
-// Implementazione del Radix Sort in base 2 per push_swap
-void radix_sort(t_stack *a, t_stack *b)
+void	sort_three(t_stack_node **a)
 {
-    int size = a->size;
-    int max_bits = get_max_bits(a);
+	t_stack_node	*big;
 
-    for (int bit = 0; bit < max_bits; bit++) {
-        int count = size;
-        while (count--) {
-            int num = a->top->value; // Prendi il valore in cima allo stack
+	big = find_max(*a);
+	if (big->value == (*a)->value)
+		ra(a, false);
+	else if ((*a)->next->value == big->value)
+		rra(a, false);
+	if ((*a)->value > (*a)->next->value)
+		sa(a, false);
+}
 
-            if (((num >> bit) & 1) == 0) {
-                push_to(a, b); // Sposta in B se il bit è 0 (pb)
-            } else {
-                rotate(a); // Ruota in A (ra)
-            }
-        }
-        while (b->size > 0) {
-            push_to(b, a); // Riporta tutto in A (pa)
-        }
-    }
+void	sort_stack(t_stack_node **a, t_stack_node **b)
+{
+	int	len_a;
+	int	len_b;
+
+	len_a = stack_lenght(*a);
+	if (len_a-- > 3 && !stack_sorted(*a))
+		pb(b, a, false);
+	if (len_a-- > 3 && !stack_sorted(*a))
+		pb(b, a, false);
+	while (len_a-- > 3 && !stack_sorted(*a))
+	{
+		init_nodes_a(*a, *b);
+		push_cheapest_to_b(a, b);
+	}
+	len_b = stack_lenght(*b);
+	sort_three(a);
+	while (len_b > 0)
+	{
+		init_nodes_b(*a, *b);
+		align_for_push(a, (*b)->target, 'a');
+		pa(a, b, false);
+		len_b = stack_lenght(*b);
+	}
+	mark_median_position(*a);
+	min_on_top(a);
 }

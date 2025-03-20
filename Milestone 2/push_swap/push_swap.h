@@ -11,39 +11,87 @@
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
-#define PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <limits.h>
-# include "libft_printf.h"
+# include "libft_printf/libft_printf.h"
 
-#define INT_MIN -2147483648
-#define INT_MAX 2147483647
-
-typedef struct s_node
+typedef struct s_stack_node
 {
-    int             value;
-    struct s_node   *next;
-} t_node;
+	int					value;
+	int					index;
+	int					push_cost;
+	int					abv_median;
+	int					cheapest;
+	struct s_stack_node	*target;
+	struct s_stack_node	*next;
+	struct s_stack_node	*prev;
+}	t_stack_node;
 
-typedef struct s_stack
-{
-    t_node  *top;
-    int     size;
-} t_stack;
+// handle_error
+int				error_syntax(char *str);
+int				error_dup(t_stack_node *a, int n);
+void			free_error(t_stack_node **a);
+void			free_stack(t_stack_node **a);
+void			free_arr(char **arr);
 
+// inizializzazione stack e nodi
+void			init_stack(t_stack_node **a, char **argv);
+void			init_nodes_a(t_stack_node *a, t_stack_node *b);
+void			init_nodes_b(t_stack_node *a, t_stack_node *b);
+void			stampa_stack(t_stack_node *stack, char *name);
 
-t_stack *init_stack(void);
-void	push(t_stack *stack, int value);
-void	free_stack(t_stack *stack);
-void	swap(t_stack *stack);
-void	push_to(t_stack *src, t_stack *dest);
-void	rotate(t_stack *stack);
-void	reverse_rotate(t_stack *stack);
-void	parse_input(t_stack *a, char **argv);
-void	radix_sort(t_stack *a, t_stack *b);
-int		pop(t_stack *stack);
+// stack utils
+void			stack_add_back(t_stack_node **stack, int n);
+void			set_target_a(t_stack_node *a, t_stack_node *b);
+void			set_target_b(t_stack_node *a, t_stack_node *b);
+void			cost_a(t_stack_node *a, t_stack_node *b);
+void			set_cheapest(t_stack_node *stack);
+void			push_cheapest_to_b(t_stack_node **a, t_stack_node **b);
+void			min_on_top(t_stack_node **a);
+void			align_for_push(t_stack_node **stack, t_stack_node *top_node,
+					char stack_name);
+bool			stack_sorted(t_stack_node *stack);
+t_stack_node	*get_cheapest(t_stack_node *a);
+
+//operations
+int				swap(t_stack_node **stack);
+void			sa(t_stack_node **a, bool print);
+void			sb(t_stack_node **b, bool print);
+void			ss(t_stack_node **a, t_stack_node **b, bool print);
+
+int				push(t_stack_node **s_to, t_stack_node **s_from);
+void			pa(t_stack_node **a, t_stack_node **b, bool print);
+void			pb(t_stack_node **b, t_stack_node **a, bool print);
+
+int				rotate(t_stack_node **stack);
+void			ra(t_stack_node **a, bool print);
+void			rb(t_stack_node **b, bool print);
+void			rr(t_stack_node **a, t_stack_node **b, bool print);
+void			rotate_both(t_stack_node **a, t_stack_node **b,
+					t_stack_node *cheapest_node);
+
+int				reverse_rotate(t_stack_node **stack);
+void			rra(t_stack_node **a, bool print);
+void			rrb(t_stack_node **b, bool print);
+void			rrr(t_stack_node **a, t_stack_node **b, bool print);
+void			reverse_rotate_both(t_stack_node **a, t_stack_node **b,
+					t_stack_node *cheapest_node);
+
+// sorting algorithm
+void			sort_three(t_stack_node **a);
+void			mark_median_position(t_stack_node *stack);
+void			sort_stack(t_stack_node **a, t_stack_node **b);
+
+//utils
+long			ft_atol(const char *s);
+t_stack_node	*find_min(t_stack_node *stack);
+t_stack_node	*find_max(t_stack_node *stack);
+t_stack_node	*stack_last(t_stack_node *stack);
+int				stack_lenght(t_stack_node *stack);
 
 #endif

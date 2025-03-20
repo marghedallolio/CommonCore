@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-./SILENT:
+.SILENT:
 
 # nome della libreria
 NAME = push_swap
@@ -22,7 +22,8 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
 # lista dei file sorgente
-SRC = main.c operations.c parsing.c sorting.c stack_utils.c
+SRC = main.c push.c reverse_rotate.c rotate.c sorting.c swap.c utils.c \
+	errors.c init.c target_cost.c stack_utils.c
 
 # genera il nome dei file oggetto (.o) a partire dai file sorgente (.c)
 OBJ = $(SRC:.c=.o)
@@ -30,14 +31,13 @@ OBJ = $(SRC:.c=.o)
 # regola principale per creare l'eseguibile
 all: $(NAME)
 
+#creazione della libreria libft_printf
 $(LIBFT):
 	make -C $(DIR_LIBFT)
 
 # creazione libreria
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-	make clean
-	make -C $(DIR_LIBFT) fclean
+$(NAME): $(LIBFT) $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 
 # compilazione dei file oggetto
 %.o: %.c

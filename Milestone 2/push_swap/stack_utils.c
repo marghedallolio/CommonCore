@@ -5,70 +5,88 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdalloli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 14:17:12 by mdalloli          #+#    #+#             */
-/*   Updated: 2025/02/24 14:17:13 by mdalloli         ###   ########.fr       */
+/*   Created: 2025/03/17 17:15:08 by mdalloli          #+#    #+#             */
+/*   Updated: 2025/03/17 17:15:12 by mdalloli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// inizializzazione dello stack (vuoto)
-t_stack *init_stack(void)
+/*seleziona il nodo piu' economico dallo stack a e lo sposta in b
+allineando lo stack prima del push*/
+void	push_cheapest_to_b(t_stack_node **a, t_stack_node **b)
 {
-    t_stack *stack;
+	t_stack_node	*cheapest_node;
 
-    stack = (t_stack *)malloc(sizeof(t_stack));
-    if (!stack)
-        return (NULL);
-    stack->top = NULL;
-    stack->size = 0;
-    return (stack);
+	cheapest_node = get_cheapest(*a);
+	if (cheapest_node->abv_median && cheapest_node->target->abv_median)
+		rotate_both(a, b, cheapest_node);
+	else if (!(cheapest_node->abv_median)
+		&& !(cheapest_node->target->abv_median))
+		reverse_rotate_both(a, b, cheapest_node);
+	align_for_push(a, cheapest_node, 'a');
+	align_for_push(b, cheapest_node->target, 'b');
+	pb(b, a, false);
 }
 
-// inserimento un elemento in cima allo stack
-void push(t_stack *stack, int value)
+/*sposta il valore minimo in cima in base alla posizione rispetto alla mediana*/
+void	min_on_top(t_stack_node **a)
 {
-    t_node *new_node;
+	t_stack_node	*min_node;
 
+	min_node = find_min(*a);
+	while ((*a)->value != min_node->value)
+	{
+		if (min_node->abv_median)
+			ra(a, false);
+		else
+			rra(a, false);
+	}
+}
+
+/*assegna un indice a ogni nodo della lista e 
+determina se e' sopra o sotto la mediana*/
+void	mark_median_position(t_stack_node *stack)
+{
+	int	i;
+	int	median;
+
+	i = 0;
 	if (!stack)
 		return ;
-    new_node = (t_node *)malloc(sizeof(t_node));
-    if (!new_node)
-        return;
-    new_node->value = value;
-    new_node->next = stack->top;
-    stack->top = new_node;
-    stack->size++;
+	median = stack_lenght(stack) / 2;
+	while (stack)
+	{
+		stack->index = i;
+		if (i <= median)
+			stack->abv_median = true;
+		else
+			stack->abv_median = false;
+		stack = stack->next;
+		i++;
+	}
 }
 
-// rimozione e restituzione del valore in cima allo stack
-int pop(t_stack *stack)
+t_stack_node	*stack_last(t_stack_node *stack)
 {
-    int value;
-    t_node *temp;
-
-    if (!stack || stack->size == 0)
-        return (INT_MIN);
-    temp = stack->top;
-    value = temp->value;
-    stack->top = temp->next;
-    free(temp);
-    stack->size--;
-    return (value);
-}
-
-// liberazione memoria dello stack
-void free_stack(t_stack *stack)
-{
-    t_node *temp;
-
 	if (!stack)
-		return ;
-    while (stack->top)
-    {
-        temp = stack->top;
-        stack->top = stack->top->next;
-        free(temp);
-    }
-    free(stack);
+		return (NULL);
+	while (stack->next)
+		stack = stack->next;
+	return (stack);
+}
+
+int	stack_lenght(t_stack_node *stack)
+{
+	int	size;
+
+	size = 0;
+	if (!stack)
+		return (0);
+	while (stack)
+	{
+		size++;
+		stack = stack->next;
+	}
+	return (size);
 }
