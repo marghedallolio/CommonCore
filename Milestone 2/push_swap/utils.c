@@ -34,6 +34,7 @@ long	ft_atol(const char *s)
 	return (res * sign);
 }
 
+/*trova il nodo con il valore minimo in una stack*/
 t_stack_node	*find_min(t_stack_node *stack)
 {
 	long			min;
@@ -54,6 +55,7 @@ t_stack_node	*find_min(t_stack_node *stack)
 	return (min_node);
 }
 
+/*trova il nodo con il valore maggiore in una stack*/
 t_stack_node	*find_max(t_stack_node *stack)
 {
 	long			max;
@@ -74,6 +76,7 @@ t_stack_node	*find_max(t_stack_node *stack)
 	return (max_node);
 }
 
+/*funzione per stampare la stack*/
 void	stampa_stack(t_stack_node *stack, char *name)
 {
 	ft_printf("Stack %s: ", name);

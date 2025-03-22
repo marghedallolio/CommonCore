@@ -67,6 +67,7 @@ void	mark_median_position(t_stack_node *stack)
 	}
 }
 
+/*restituisce l'ultimo nodo*/
 t_stack_node	*stack_last(t_stack_node *stack)
 {
 	if (!stack)
@@ -76,6 +77,7 @@ t_stack_node	*stack_last(t_stack_node *stack)
 	return (stack);
 }
 
+/*ritorna la lunghezza dello stack*/
 int	stack_lenght(t_stack_node *stack)
 {
 	int	size;

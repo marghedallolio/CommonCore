@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 
+/*verifica se lo stack e' ordinato in ordine crescente*/
 bool	stack_sorted(t_stack_node *stack)
 {
 	if (!stack)
@@ -25,6 +26,7 @@ bool	stack_sorted(t_stack_node *stack)
 	return (true);
 }
 
+/*sorta uno stack di tre elementi*/
 void	sort_three(t_stack_node **a)
 {
 	t_stack_node	*big;

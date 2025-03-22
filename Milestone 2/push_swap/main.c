@@ -12,7 +12,6 @@
 
 #include "push_swap.h"
 
-/*vedere se split libft funziona*/
 int	main(int argc, char **argv)
 {
 	t_stack_node	*a;

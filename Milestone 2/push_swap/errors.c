@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 
+/*verifica se una stringa rappresenta un numero intero valido*/
 int	error_syntax(char *str)
 {
 	int	i;
@@ -32,6 +33,7 @@ int	error_syntax(char *str)
 	return (0);
 }
 
+/*verifica se un numero n è già presente nella lista*/
 int	error_dup(t_stack_node *a, int n)
 {
 	while (a)
@@ -43,6 +45,8 @@ int	error_dup(t_stack_node *a, int n)
 	return (0);
 }
 
+/*libera la memoria della stack a, stampa un messaggio di errore 
+e termina il programma*/
 void	free_error(t_stack_node **a)
 {
 	free_stack(a);
@@ -50,6 +54,7 @@ void	free_error(t_stack_node **a)
 	exit(1);
 }
 
+/*libera lo stack*/
 void	free_stack(t_stack_node **a)
 {
 	t_stack_node	*temp;
@@ -63,6 +68,7 @@ void	free_stack(t_stack_node **a)
 	*a = NULL;
 }
 
+/*libera l'array*/
 void	free_arr(char **arr)
 {
 	int		j;

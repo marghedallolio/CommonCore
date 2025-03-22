@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 
+/*nizializza una lista t_stack_node partendo da un array di stringhe argv*/
 void	init_stack(t_stack_node **a, char **argv)
 {
 	int	n;
@@ -48,6 +49,7 @@ void	init_nodes_b(t_stack_node *a, t_stack_node *b)
 	set_target_b(a, b);
 }
 
+/*aggiunge un nuovo nodo in fondo alla lista t_stack_node*/
 void	stack_add_back(t_stack_node **stack, int n)
 {
 	t_stack_node	*node;

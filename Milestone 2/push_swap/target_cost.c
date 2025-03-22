@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 
+/*assegna un target alla stack a*/
 void	set_target_a(t_stack_node *a, t_stack_node *b)
 {
 	t_stack_node	*current;
@@ -39,6 +40,7 @@ void	set_target_a(t_stack_node *a, t_stack_node *b)
 	}
 }
 
+/*assegna un target alla stack b*/
 void	set_target_b(t_stack_node *a, t_stack_node *b)
 {
 	t_stack_node	*current;
@@ -66,6 +68,8 @@ void	set_target_b(t_stack_node *a, t_stack_node *b)
 	}
 }
 
+/*calcola il costo di push per ogni nodo dello stack a 
+in base alla sua posizione rispetto alla mediana*/
 void	cost_a(t_stack_node *a, t_stack_node *b)
 {
 	int	len_a;
@@ -86,6 +90,7 @@ void	cost_a(t_stack_node *a, t_stack_node *b)
 	}
 }
 
+/*imposta il campo cheapest del nodo con il costo di push minimo*/
 void	set_cheapest(t_stack_node *stack)
 {
 	long			cheapest_val;
@@ -106,6 +111,7 @@ void	set_cheapest(t_stack_node *stack)
 	cheapest_node->cheapest = true;
 }
 
+/*trova il nodo con il costo minimo di push nello stack a*/
 t_stack_node	*get_cheapest(t_stack_node *a)
 {
 	t_stack_node	*current;
