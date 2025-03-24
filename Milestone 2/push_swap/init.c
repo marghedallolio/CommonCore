@@ -13,21 +13,21 @@
 #include "push_swap.h"
 
 /*nizializza una lista t_stack_node partendo da un array di stringhe argv*/
-void	init_stack(t_stack_node **a, char **argv)
+void	init_stack(t_stack_node **a, char **argv, int argc)
 {
-	int	n;
-	int	i;
+	long int	n;
+	int			i;
 
 	i = 0;
 	while (argv[i])
 	{
 		if (error_syntax(argv[i]))
-			free_error(a);
+			free_error(a, argc, argv);
 		n = ft_atol(argv[i]);
 		if (n > INT_MAX || n < INT_MIN)
-			free_error(a);
+			free_error(a, argc, argv);
 		if (error_dup(*a, (int)n))
-			free_error(a);
+			free_error(a, argc, argv);
 		stack_add_back(a, (int)n);
 		i++;
 	}

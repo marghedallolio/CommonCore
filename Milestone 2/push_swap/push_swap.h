@@ -35,12 +35,12 @@ typedef struct s_stack_node
 // errors
 int				error_syntax(char *str);
 int				error_dup(t_stack_node *a, int n);
-void			free_error(t_stack_node **a);
+void			free_error(t_stack_node **a, int argc, char **str);
 void			free_stack(t_stack_node **a);
 void			free_arr(char **arr);
 
 // init
-void			init_stack(t_stack_node **a, char **argv);
+void			init_stack(t_stack_node **a, char **argv, int argc);
 void			init_nodes_a(t_stack_node *a, t_stack_node *b);
 void			init_nodes_b(t_stack_node *a, t_stack_node *b);
 void			stack_add_back(t_stack_node **stack, int n);

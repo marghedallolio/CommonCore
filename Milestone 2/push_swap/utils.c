@@ -13,24 +13,28 @@
 #include "push_swap.h"
 
 // ascii to long
-long	ft_atol(const char *s)
+long int	ft_atol(const char *s)
 {
-	long	res;
-	int		sign;
+	long int	res;
+	int			sign;
+	int			i;
 
+	i = 0;
 	res = 0;
 	sign = 1;
-	while (*s == ' ' || *s == '\t' || *s == '\n' || \
-			*s == '\r' || *s == '\f' || *s == '\v')
-		s++;
-	if (*s == '-' || *s == '+')
+	while (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13))
+		i++;
+	if (s[i] == '-' || s[i] == '+')
 	{
-		if (*s == '-')
+		if (s[i] == '-')
 			sign = -1;
-		s++;
+		i++;
 	}
-	while (ft_isdigit(*s))
-		res = res * 10 + (*s++ - '0');
+	while (s[i] >= '0' && s[i] <= '9')
+	{
+		res = res * 10 + (s[i] - '0');
+		i++;
+	}
 	return (res * sign);
 }
 

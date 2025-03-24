@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 		str = ft_split(argv[1], ' ');
 	else
 		str = &argv[1];
-	init_stack(&a, str);
+	init_stack(&a, str, argc);
 	if (!stack_sorted(a))
 	{
 		if (stack_lenght(a) == 2)

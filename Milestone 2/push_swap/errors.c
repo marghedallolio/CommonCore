@@ -47,9 +47,11 @@ int	error_dup(t_stack_node *a, int n)
 
 /*libera la memoria della stack a, stampa un messaggio di errore 
 e termina il programma*/
-void	free_error(t_stack_node **a)
+void	free_error(t_stack_node **a, int argc, char **str)
 {
 	free_stack(a);
+	if (argc == 2)
+		free_arr(str);
 	ft_putstr_fd("Error\n", 2);
 	exit(1);
 }
