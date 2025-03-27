@@ -32,3 +32,83 @@ Caling your function get_next_line in a lop will therefore allow you to read the
 Make sure that your function behaves wel when it reads from a file, from the standard output, from a redirection, etc...
 
 No call to another function will be done on the file descriptor between 2 calls of get_next_line. Finally we consider that get_next_line has an undefined behaviour when reading from a binary file.*/
+
+
+#include <stdlib.h>
+#include <unistd.h>
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 42
+#endif
+
+static char *ft_strchr(const char *s, int c)
+{
+	while (*s)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+	}
+	return (NULL);
+}
+static char *ft_strdup(const char *s)
+{
+	char    *dup;
+	int     i = 0;
+	while (s[i])
+		i++;
+	dup = malloc(i + 1);
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		dup[i] = s[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
+}
+static char *ft_strjoin(char *s1, char *s2)
+{
+	int i = 0, j = 0;
+	char *new_str;
+	while (s1 && s1[i]) i++;
+	while (s2[j]) j++;
+	new_str = malloc(i + j + 1);
+	if (!new_str)
+		return (NULL);
+	i = 0;
+	while (s1 && s1[i])
+	{
+		new_str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+		new_str[i++] = s2[j++];
+	new_str[i] = '\0';
+	free(s1);
+	return (new_str);
+}
+char *get_next_line(int fd)
+{
+	static char *buffer;
+	char temp[BUFFER_SIZE + 1], *line;
+	int bytes_read;
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	while (!ft_strchr(buffer, '\n') && (bytes_read = read(fd, temp, BUFFER_SIZE)) > 0)
+	{
+		temp[bytes_read] = '\0';
+		buffer = ft_strjoin(buffer, temp);
+		if (!buffer)
+			return (NULL);
+	}
+	if (!buffer || !*buffer)
+		return (NULL);
+	line = ft_strdup(buffer);
+	free(buffer);
+	buffer = NULL;
+	return (line);
+}
